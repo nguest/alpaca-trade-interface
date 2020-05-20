@@ -11,24 +11,17 @@ const styles = {
     alignItems: 'center',
     border: `1px solid ${colors.text}`,
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     gridColumn: '1 / span 1',
-    gridRow: '8 / span 3',
+    gridRow: '1 / span 1',
+    margin: 0,
   },
-  header: {
-    alignItems: 'center',
-    borderBottom: `1px solid ${colors.text}`,
-    display: 'flex',
-    height: spacing.unit * 6,
-    justifyContent: 'center',
+  input: {
+    fontSize: '1.0rem',
+    marginBottom: spacing.unit,
+    marginTop: spacing.unit,
+    padding: spacing.unit,
     width: '100%',
-  },
-  balance: {
-    alignItems: 'center',
-    display: 'flex',
-    flex: 1,
-    fontSize: '1.4rem',
-    justifyContent: 'center',
   },
 };
 

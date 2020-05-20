@@ -2,6 +2,10 @@ export const initialState = {
   notifications: [],
   historicalData: null,
   currentUser: null,
+  connectionStatus: {
+    connection: false,
+    stream: false,
+  }
 };
 
 // TODO: Split reducer into many
@@ -28,12 +32,20 @@ const reducer = (state = initialState, action = {}) => {
       },
     };
   case 'GET_ACCOUNT_DATA_SUCCEEDED':
-    return { ...state, accountData: action.data }
+    return { ...state, accountData: action.data };
   case 'GET_CLOCK_SUCCEEDED':
     return {
       ...state,
       clock: action.data,
     };
+  case 'UPDATE_CONNECTION_STATUS_SUCCEEDED':
+    return {
+      ...state,
+      connectionStatus: {
+        ...state.connectionStatus,
+        ...action.status,
+      }
+    }
   case 'CREATE_NOTIFICATION':
     return {
       ...state,

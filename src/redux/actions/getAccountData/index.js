@@ -20,7 +20,6 @@ export const getAccountData = () => (dispatch) => {
 
   axios.get('https://paper-api.alpaca.markets/v2/account', { headers })
     .then((response) => {
-      console.log({ response });
       dispatch(getAccountDataSucceeded(response.data));
       return dispatch(createNotification({ noteType: 'OK', message: 'Account Data loaded successfully' }));
     })

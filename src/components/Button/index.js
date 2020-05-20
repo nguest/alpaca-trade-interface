@@ -5,6 +5,8 @@ import { func, string, oneOf, bool } from 'prop-types';
 import styles from './styles';
 
 const Button = ({
+  active,
+  buttonType = 'button',
   disabled,
   icon,
   label,
@@ -13,9 +15,9 @@ const Button = ({
   type,
 }) => (
   <button
-    css={styles.button(null, disabled, type)}
+    css={styles.button(active, disabled, type)}
     disabled={disabled}
-    type="button"
+    type={buttonType}
     onClick={(e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -29,12 +31,14 @@ const Button = ({
 );
 
 Button.propTypes = {
+  active: bool,
+  buttonType: string,
   disabled: bool,
   icon: string,
   label: string,
   onClick: func,
   title: string,
-  type: oneOf(['default', 'invisible']),
+  type: oneOf(['default', 'invisible', 'outline']),
 };
 
 export default Button;

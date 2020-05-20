@@ -52,11 +52,9 @@ const d3Utils = {
     const xAxis = (g) => g
       .attr('transform', `translate(0,${dimensions.height - d3Config.margin.bottom})`)
       .call(d3.axisBottom(x)
-        // .tickValues(d3.utcMonday
-        // .every(dimensions.width > 720 ? 1 : 2)
-        //   .range(data[0].t, data[data.length - 1].t))
+        .tickValues(data.map(d => d.t).filter((t, i) => i % 5 === 0))
         .tickFormat(d3.utcFormat('%-m/%-d')))
-      .call((g) => g.select('.domain').remove());
+     //.call((g) => g.select('.domain').remove());
 
     const yAxis = (g) => g
       .attr('transform', `translate(${d3Config.margin.left},0)`)

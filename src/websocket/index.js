@@ -101,7 +101,7 @@ const listenTradeUpdates = {
 const auth = {
   action: 'authenticate',
   data: {
-    key_id: process.env.REACT_APP_ALPACA_API_KEY,
+    key_id: process.env.REACT_APP_ALPACA_CLIENT_ID,
     secret_key: process.env.REACT_APP_ALPACA_API_SECRET,
   },
 };
@@ -166,26 +166,29 @@ const WebsocketSubscriber = ({ dispatch }) => {
   ws.addEventListener('open', (event) => {
     console.info('OPENED WS CONNECTION', event);
     ws.send(JSON.stringify(auth));
-    //ws.send(JSON.stringify(listen));
+    dispatch(actions.updateConnectionStatus({ connection: true }));
   });
   
   ws.addEventListener('close', () => {
     console.info('CLOSED WS CONNECTION');
+    dispatch(actions.updateConnectionStatus({ stream: null, connection: false }));
   });
   
   ws.addEventListener('message', (event) => {
+    
     //console.log('Message from server ', event.data);
     // let str = new TextDecoder(ENCODING).decode(event.data);
     // const str = parseInt(event.data).toString(2)
     //const str = ab2str(new Uint8Array(event.data)); - for trade data need to unbinary it
     const msg = JSON.parse(event.data);
-    console.log({msg});
+    console.log({ msg });
   
     if (msg.stream === 'authorization' && msg.data.status === 'authorized') {
+      console.info('ATTEMPT OPEN LISTENING STREAM');
       ws.send(JSON.stringify(listenData));
-
     } else if (msg.stream === 'listening') {
       console.info('OPENED LISTENING STREAM')
+      dispatch(actions.updateConnectionStatus({ stream: msg.data.streams }));
     } else {
       const ticker = msg.stream.split('.').pop();
       dispatch(actions.saveLiveData({ ticker, data: msg.data }));
@@ -195,3 +198,30 @@ const WebsocketSubscriber = ({ dispatch }) => {
 }
 
 export default connect(null, null)(WebsocketSubscriber);
+
+
+/* 
+msg: {
+  data: {
+    P: 313.06
+    S: 1
+    T: "AAPL"
+    X: 15
+    c: [1]
+    ev: "Q"
+    p: 312.99
+    s: 1
+    t: 1589918457110369500
+x: 2
+  },
+  stream: "Q.AAPL"
+}
+
+datapoint:
+c: 314.945
+h: 315.1
+l: 314.9
+o: 314.96
+t: Mon May 18 2020 11:55:00 GMT-0700 (Pacific Daylight Time) {}
+v: 2734
+*/

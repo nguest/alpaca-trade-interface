@@ -27,6 +27,10 @@ import {
 } from './getAccountData';
 
 import {
+  updateConnectionStatus,
+} from './updateConnectionStatus';
+
+import {
   getClock,
 } from './getClock';
 
@@ -48,6 +52,7 @@ const actions = {
   saveLiveData,
   saveLiveDataErrored,
   saveLiveDataSucceeded,
+  updateConnectionStatus,
 };
 
 export default actions;

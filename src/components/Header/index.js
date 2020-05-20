@@ -17,7 +17,7 @@ const Header = ({
     <header css={styles.header}>
       <MarketClock clock={clock} onRequestClock={onRequestClock} />
       <div css={styles.loginStatus}>
-        <Icon name="contact" />
+        <Icon name="person-circle-outline" />
         <span css={styles.statusText}>Signed In</span>
         <Link to="/" replace={false} styleOverrides={styles.link}>
           Sign Out

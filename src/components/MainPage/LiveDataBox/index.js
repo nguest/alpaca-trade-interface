@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import React from 'react';
+import { format } from 'date-fns';
 import { object } from 'prop-types';
 
 import styles from './styles';
@@ -10,19 +11,18 @@ const LiveDataBox = ({
 }) => {
   let title = 'Waiting';
   let price = '--';
-  let time = '--';
-  if (Object.keys(liveData).length) {
+  if (liveData && Object.keys(liveData).length) {
     price = liveData.AAPL.P;
     title = 'AAPL';
-    time = new Date(liveData.t);
   }
+
   return (
     <section css={styles.container}>
-      <div style={styles.header}>
+      <div css={styles.header}>
         <h3 css={styles.h3}>{ title }</h3>
       </div>
       <div css={styles.balance}>{ price }</div>
-      <p>{ time }</p>
+      { liveData && <p>{ format(liveData.time * 0.001, 'HH:mm:ss') }</p> }
     </section>
   );
 };

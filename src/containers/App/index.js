@@ -27,13 +27,13 @@ const App = ({
 const mapStateToProps = (state) => ({
   clock: state.clock || null,
   historicalData: state.historicalData || { },
-  liveData: state.liveData || { },
+  liveData: state.liveData || null,
   notifications: state.notifications || [],
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getClock: () => dispatch(actions.getClock()),
-  getHistoricalData: () => dispatch(actions.getHistoricalData()),
+  getHistoricalData: (params) => dispatch(actions.getHistoricalData(params)),
 });
 
 App.propTypes = {

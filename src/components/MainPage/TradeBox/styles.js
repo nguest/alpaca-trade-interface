@@ -12,7 +12,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gridColumn: '1 / span 1',
-    gridRow: '2 / span 1',
+    gridRow: '4 / span 3',
     justifyContent: 'center',
   },
   header: {

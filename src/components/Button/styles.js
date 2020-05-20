@@ -4,12 +4,13 @@ import spacing from '../../styles/spacing';
 
 const hover = (type) => ({
   backgroundColor: type === 'invisible' ? colors.mg : colors.hilite,
+  cursor: 'pointer',
 });
 
 
 const getBackgroundColor = (active, type) => {
-  if (type === 'invisible') {
-    if (active) return colors.bg;
+  if (type === 'invisible' || type === 'outline') {
+    if (active) return colors.mg;
     return 'transparent';
   }
   return colors.hilite;
@@ -19,9 +20,9 @@ const styles = {
   button: (active, disabled, type) => ({
     alignItems: 'center',
     backgroundColor: getBackgroundColor(active, type),
-    border: 'none',
+    border: type === 'outline' ? `1px solid ${colors.text}` : 'none',
     borderRadius: 3,
-    color: colors.white,
+    color: type === 'outline' ? colors.text : colors.white,
     display: 'flex',
     fontSize: '1rem',
     justifyContent: 'center',

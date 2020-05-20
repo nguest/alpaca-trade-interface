@@ -13,7 +13,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gridColumn: '1 / span 1',
-    gridRow: '1 / span 1',
+    gridRow: '2 / span 2',
   },
   header: {
     alignItems: 'center',

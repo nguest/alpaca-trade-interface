@@ -22,7 +22,6 @@ export const getClock = () => (dispatch) => {
   };
 
   console.log({ ALPACA_CLIENT_ID: process.env.REACT_APP_ALPACA_CLIENT_ID, ALPACA_API_SECRET: process.env.REACT_APP_ALPACA_API_SECRET });
-  
 
   axios.get('https://paper-api.alpaca.markets/v2/clock', { headers })
     .then((response) => {
