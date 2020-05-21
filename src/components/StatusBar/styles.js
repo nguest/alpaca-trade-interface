@@ -16,7 +16,6 @@ const styles = {
     bottom: 0,
     left: 0,
     width: '100%',
-    //flex: 1,
   },
   statusBlock: {
     marginRight: spacing.unit,

@@ -6,7 +6,6 @@ export const initialState = {
     connection: false,
     stream: false,
   },
-  orders: [],
   newOrders: [],
 };
 
@@ -66,10 +65,17 @@ const reducer = (state = initialState, action = {}) => {
   case 'GET_ORDERS_SUCCEEDED':
     return {
       ...state,
-      orders: [
-        ...state.orders,
-        ...action.data,
-      ],
+      orders: action.data,
+    };
+  case 'CANCEL_ORDER_SUCCEEDED':
+    return {
+      ...state,
+      orders: state.orders.filter((o) => o.id !== action.id),
+    };
+  case 'GET_POSITIONS_SUCCEEDED':
+    return {
+      ...state,
+      positions: action.data,
     };
   case 'CREATE_NOTIFICATION':
     return {

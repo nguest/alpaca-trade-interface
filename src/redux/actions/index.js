@@ -21,8 +21,16 @@ import {
 } from './createOrder';
 
 import {
- getOrders,
+  getOrders,
 } from './getOrders';
+
+import {
+  cancelOrder,
+} from './cancelOrder';
+
+import {
+  getPositions,
+} from './getPositions';
 
 import {
   getAccountData,
@@ -43,6 +51,7 @@ import {
 import createNotification from './createNotification';
 
 const actions = {
+  cancelOrder,
   createNotification,
   createOrder,
   getClock,
@@ -54,6 +63,7 @@ const actions = {
   getHistoricalData,
   getHistoricalDataErrored,
   getHistoricalDataSucceeded,
+  getPositions,
   saveLiveData,
   saveLiveDataErrored,
   saveLiveDataSucceeded,

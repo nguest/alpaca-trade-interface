@@ -10,7 +10,6 @@ import MainPage from '../MainPage';
 import OrdersPage from '../OrdersPage';
 
 import Route from '../../router/Route';
-import Header from '../Header';
 import Link from '../../router/Link';
 
 

@@ -10,7 +10,6 @@ const styles = {
     background: `linear-gradient(45deg, ${colors.bg[0]},${colors.bg[1]})`,
     boxSizing: 'border-box',
     color: colors.text,
-   // display: 'grid',
     fontFamily: '"Be Vietnam", monospace',
     fontSize: 12,
     height: '100%',
@@ -32,7 +31,7 @@ const styles = {
       width: '100%',
       justifyContent: 'center',
       height: spacing.unit * 6,
-    }
+    },
   },
   global: {
     a: {

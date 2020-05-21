@@ -45,7 +45,7 @@ const MainPage = ({
       <Header currentAddress={currentAddress} clock={clock} onRequestClock={onRequestClock} />
       <div css={styles.mainGrid}>
         <LiveDataBox liveData={liveData && liveData[ticker]} ticker={ticker} />
-        <Orders />
+        <Orders type="compact" />
         <TradeBox
           onCreateOrder={onCreateOrder}
           ticker={ticker}

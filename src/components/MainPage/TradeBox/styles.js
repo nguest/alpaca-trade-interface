@@ -12,8 +12,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gridColumn: '1 / span 1',
-    gridRow: '3  / span 2',
-    justifyContent: 'center',
+    gridRow: '3  / span 1',
   },
   header: {
     alignItems: 'center',
@@ -38,6 +37,12 @@ const styles = {
     padding: spacing.unit,
     width: '100%',
   },
+  buttonContainer: {
+    display: 'flex',
+    button: {
+      width: `calc(50% - ${spacing.unit * 0.5}`,
+    }
+  }
 };
 
 export default styles;
