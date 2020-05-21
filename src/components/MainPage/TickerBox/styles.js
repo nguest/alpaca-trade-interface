@@ -9,19 +9,22 @@ const styles = {
   ...typography,
   container: {
     alignItems: 'center',
-    border: `1px solid ${colors.text}`,
     display: 'flex',
     flexDirection: 'row',
-    gridColumn: '1 / span 1',
-    gridRow: '1 / span 1',
     margin: 0,
   },
   input: {
     fontSize: '1.0rem',
-    marginBottom: spacing.unit,
-    marginTop: spacing.unit,
+    marginRight: spacing.unit,
     padding: spacing.unit,
+    height: spacing.unit * 4,
     width: '100%',
+    background: 'transparent',
+    border: 'none',
+    '&:active': {
+      background: colors.md,
+      border: `1px solid ${colors.text}`,
+    },
   },
 };
 

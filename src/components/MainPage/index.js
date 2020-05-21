@@ -2,10 +2,11 @@
 import { jsx } from '@emotion/core';
 import React, { useEffect, useState } from 'react';
 import { func, string, object } from 'prop-types';
-import TickerBox from './TickerBox';
 import LiveDataBox from './LiveDataBox';
 import TradeBox from './TradeBox';
+import Orders from '../../containers/Orders';
 import Account from '../../containers/Account';
+import LiveDataStreams from './LiveDataStreams';
 import Status from '../../containers/Status';
 import Header from '../Header';
 import styles from './styles';
@@ -16,7 +17,7 @@ const MainPage = ({
   clock,
   liveData,
   currentAddress,
-  onCreateTransaction,
+  onCreateOrder,
   onRequestClock,
   onRequestHistoricalData,
   historicalData,
@@ -43,19 +44,21 @@ const MainPage = ({
     <main css={styles.main}>
       <Header currentAddress={currentAddress} clock={clock} onRequestClock={onRequestClock} />
       <div css={styles.mainGrid}>
-        <TickerBox onRequestTicker={onRequestTicker} />
-        <LiveDataBox liveData={liveData} />
+        <LiveDataBox liveData={liveData && liveData[ticker]} ticker={ticker} />
+        <Orders />
         <TradeBox
-          onCreateTransaction={onCreateTransaction}
-          currentAddress={currentAddress}
+          onCreateOrder={onCreateOrder}
+          ticker={ticker}
         />
         <Account />
         <CandlestickChart
           onRequestDuration={onRequestDuration}
+          onRequestTicker={onRequestTicker}
           duration={duration}
           timeSeriesData={historicalData[ticker]}
           ticker={ticker}
         />
+        <LiveDataStreams />
       </div>
       <Status />
     </main>
@@ -66,7 +69,7 @@ MainPage.propTypes = {
   clock: object,
   liveData: object,
   currentAddress: string,
-  onCreateTransaction: func,
+  onCreateOrder: func,
   onRequestClock: func,
   onRequestHistoricalData: func,
   historicalData: object,

@@ -21,11 +21,11 @@ const MarketClock = ({
       <Icon name="time-outline" />
       { clock && (
         <Fragment>
+          <div>{ clock.is_open ? 'Market Open' : 'Market Closed' }</div>
           <div>
             <Icon name="sunny-outline" />
             { format(new Date(clock.next_open), 'dd MMM HH:mm') }
           </div>
-          <div>{ clock.is_open ? 'Market Open' : 'Market Closed' }</div> 
           <div>
             <Icon name="moon-outline" />
             { format(new Date(clock.next_close), 'dd MMM HH:mm') }

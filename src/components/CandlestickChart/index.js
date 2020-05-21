@@ -8,14 +8,15 @@ import d3Utils from './utils';
 import spacing from '../../styles/spacing';
 import { scales } from '../MainPage/helpers';
 import styles from './styles';
+import TickerBox from '../MainPage/TickerBox';
 
 
 const CandlestickChart = ({
   duration,
   onRequestDuration,
-  ticker,
+  onRequestTicker,
   timeSeriesData = [],
- }) => {
+}) => {
   const [dimensions, setDimensions] = useState({ width: 100, height: 100 });
   const onResize = (width, height) => setDimensions({ width, height });
 
@@ -29,13 +30,13 @@ const CandlestickChart = ({
   return (
     <div css={styles.container}>
       <header css={styles.header}>
-        <h3>{ ticker }</h3>
+        <TickerBox onRequestTicker={onRequestTicker} />
         <div css={styles.buttonContainer}>
           { Object.keys(scales).map((scale) => (
             <Button
               active={scale === duration}
               label={scale}
-              type="outline"
+              type="invisible"
               key={scale}
               onClick={() => onRequestDuration(scale)}
             />
@@ -62,7 +63,7 @@ const CandlestickChart = ({
 CandlestickChart.propTypes = {
   duration: string,
   onRequestDuration: func,
-  ticker: string,
+  onRequestTicker: func,
   timeSeriesData: array,
 };
 

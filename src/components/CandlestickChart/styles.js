@@ -7,8 +7,7 @@ const styles = {
   container: {
     border: `1px solid ${colors.text}`,
     gridColumn: '2 / span 3',
-    gridRow: '1 / span 10',
-    left: spacing.unit,
+    gridRow: '1 / span 7',
   },
   header: {
     alignItems: 'center',

@@ -94,7 +94,7 @@ import { connect } from 'react-redux';
 const listenTradeUpdates = {
   action: 'listen',
   data: {
-    streams: ['trade_updates'],
+    streams: ['account_updates', 'trade_updates'],
   },
 };
 
@@ -109,7 +109,7 @@ const auth = {
 const listenData = {
   action: 'listen',
   data: {
-    streams: ['T.AAPL', 'Q.AAPL', 'AM.AAPL'],
+    streams: ['T.AAPL'],//, 'Q.AAPL', 'AM.AAPL'],
   },
 };
 
@@ -124,38 +124,6 @@ const str2ab = (str) => {
 
 const ab2str = (buf) => String.fromCharCode.apply(null, new Uint8Array(buf));
 
-/*
-///const ws = new WebSocket('wss://paper-api.alpaca.markets/stream');
-const ws = new WebSocket('wss://data.alpaca.markets/stream');
-ws.binaryType = 'arraybuffer';
-
-ws.addEventListener('open', (event) => {
-  console.info('OPENED WS CONNECTION', event);
-  ws.send(JSON.stringify(auth));
-  //ws.send(JSON.stringify(listen));
-});
-
-ws.addEventListener('close', () => {
-  console.info('CLOSED WS CONNECTION');
-});
-
-ws.addEventListener('message', (event) => {
-  //console.log('Message from server ', event.data);
-  // let str = new TextDecoder(ENCODING).decode(event.data);
-  // const str = parseInt(event.data).toString(2)
-  //const str = ab2str(new Uint8Array(event.data)); - for trade data need to unbinary it
-  const msg = JSON.parse(event.data);
-  console.log({msg});
-
-  if (msg.stream === 'authorization' && msg.data.status === 'authorized') {
-    ws.send(JSON.stringify(listenData));
-  } else {
-    const ticker = msg.stream.split('.').pop();
-    dispatch(actions.saveLiveData({ ticker, data: msg.data }));
-  };
-});
-*/
-//export default ws;
 
 const WebsocketSubscriber = ({ dispatch }) => {
   console.log('WebsocketSubscriber');
@@ -181,21 +149,28 @@ const WebsocketSubscriber = ({ dispatch }) => {
     // const str = parseInt(event.data).toString(2)
     //const str = ab2str(new Uint8Array(event.data)); - for trade data need to unbinary it
     const msg = JSON.parse(event.data);
-    console.log({ msg });
-  
-    if (msg.stream === 'authorization' && msg.data.status === 'authorized') {
-      console.info('ATTEMPT OPEN LISTENING STREAM');
-      ws.send(JSON.stringify(listenData));
-    } else if (msg.stream === 'listening') {
-      console.info('OPENED LISTENING STREAM')
-      dispatch(actions.updateConnectionStatus({ stream: msg.data.streams }));
-    } else {
+    console.log('msg', msg);
+    switch (msg.stream) {
+    case 'authorization':
+      if (msg.data.status === 'authorized') {
+        console.info('AUTHORIZED: ATTEMPT OPEN LISTENING STREAM');
+        return ws.send(JSON.stringify(listenData));
+      }
+      return false;
+    case 'listening':
+      console.info('OPENED LISTENING STREAM');
+      return dispatch(actions.updateConnectionStatus({ stream: msg.data.streams }));
+    case 'ummm': {
       const ticker = msg.stream.split('.').pop();
-      dispatch(actions.saveLiveData({ ticker, data: msg.data }));
-    };
+      return dispatch(actions.saveLiveData({ ticker, data: msg.data }));
+    }
+    case 'trade_updates':
+      return dispatch(actions.saveTradeUpdate(msg.data));
+    default:
+    }
   });
   return null;
-}
+};
 
 export default connect(null, null)(WebsocketSubscriber);
 

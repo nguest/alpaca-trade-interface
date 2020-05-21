@@ -13,6 +13,6 @@ export const saveLiveDataSucceeded = ({ ticker, data }) => ({
 
 
 export const saveLiveData = ({ ticker, data }) => (dispatch) => {
-  dispatch(saveLiveDataSucceeded({ ticker, data }));
-  return dispatch(createNotification({ noteType: 'OK', message: 'Got feed' }));
+  return dispatch(saveLiveDataSucceeded({ ticker, data }));
+  //return dispatch(createNotification({ noteType: 'OK', message: 'Got feed' }));
 };

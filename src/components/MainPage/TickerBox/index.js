@@ -14,7 +14,6 @@ const TickerBox = ({
 
   return (
     <form css={styles.container}>
-      <label htmlFor="login-form">Ticker</label>
       <input
         css={styles.input}
         type="text"

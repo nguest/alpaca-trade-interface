@@ -5,7 +5,9 @@ export const initialState = {
   connectionStatus: {
     connection: false,
     stream: false,
-  }
+  },
+  orders: [],
+  newOrders: [],
 };
 
 // TODO: Split reducer into many
@@ -14,11 +16,10 @@ const reducer = (state = initialState, action = {}) => {
   case 'REQUEST_LOGIN_SUCCEEDED':
     return {
       ...state,
-      balance: action.payload.balance,
-      currentAddress: action.payload.currentAddress,
     };
   case 'REQUEST_LOGIN_ERRORED':
   case 'GET_HISTORICAL_DATA_ERRORED':
+  case 'CREATE_ORDER_ERRORED':
     return { ...state, lastError: action.error };
   case 'GET_HISTORICAL_DATA_SUCCEEDED':
   case 'CREATE_TRANSACTION_SUCCEEDED':
@@ -30,6 +31,14 @@ const reducer = (state = initialState, action = {}) => {
         ...state.liveData,
         [action.ticker]: action.data,
       },
+    };
+  case 'SAVE_TRADE_UPDATE_SUCCEEDED':
+    return {
+      ...state,
+      tradeUpdates: [
+        ...state.tradeUpdates,
+        action.data,
+      ],
     };
   case 'GET_ACCOUNT_DATA_SUCCEEDED':
     return { ...state, accountData: action.data };
@@ -44,8 +53,24 @@ const reducer = (state = initialState, action = {}) => {
       connectionStatus: {
         ...state.connectionStatus,
         ...action.status,
-      }
-    }
+      },
+    };
+  case 'CREATE_ORDER_SUCCEEDED':
+    return {
+      ...state,
+      newOrders: [
+        ...state.newOrders,
+        action.data,
+      ],
+    };
+  case 'GET_ORDERS_SUCCEEDED':
+    return {
+      ...state,
+      orders: [
+        ...state.orders,
+        ...action.data,
+      ],
+    };
   case 'CREATE_NOTIFICATION':
     return {
       ...state,

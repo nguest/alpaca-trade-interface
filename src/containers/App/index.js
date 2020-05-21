@@ -6,6 +6,7 @@ import actions from '../../redux/actions';
 
 const App = ({
   clock,
+  createOrder,
   error,
   getClock,
   getHistoricalData,
@@ -18,6 +19,7 @@ const App = ({
     error={error}
     liveData={liveData}
     notifications={notifications}
+    onCreateOrder={createOrder}
     onRequestHistoricalData={getHistoricalData}
     onRequestClock={getClock}
     historicalData={historicalData}
@@ -34,10 +36,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getClock: () => dispatch(actions.getClock()),
   getHistoricalData: (params) => dispatch(actions.getHistoricalData(params)),
+  createOrder: (params) => dispatch(actions.createOrder(params)),
 });
 
 App.propTypes = {
   clock: object,
+  createOrder: func,
   error: object,
   getClock: func,
   getHistoricalData: func,

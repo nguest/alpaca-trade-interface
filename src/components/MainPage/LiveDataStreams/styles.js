@@ -8,20 +8,12 @@ import typography from '../../../styles/typography';
 const styles = {
   ...typography,
   container: {
-    alignItems: 'center',
+    //alignItems: 'center',
     border: `1px solid ${colors.text}`,
     display: 'flex',
     flexDirection: 'column',
-    gridColumn: '1 / span 1',
-    gridRow: '1 / span 2',
-  },
-  header: {
-    alignItems: 'center',
-    borderBottom: `1px solid ${colors.text}`,
-    display: 'flex',
-    height: spacing.unit * 6,
-    justifyContent: 'center',
-    width: '100%',
+    gridColumn: '2 / span ',
+    gridRow: '8 / span 3',
   },
   balance: {
     alignItems: 'center',
@@ -30,6 +22,13 @@ const styles = {
     fontSize: '1.4rem',
     justifyContent: 'center',
   },
+  table: {
+    fontSize: '0.8rem',
+    '> thead tr': {
+      borderBottom: `1px solid ${colors.text}`,
+
+    }
+  }
 };
 
 export default styles;

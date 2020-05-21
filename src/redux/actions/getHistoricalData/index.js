@@ -19,7 +19,7 @@ export const getHistoricalData = ({ timeframe = '1D', limit = 78, symbols }) => 
   //const symbols = 'AAPL';
   const before = '2020-04-15T09:30:00-04:00';
   const params = {
-    timeframe,
+    //timeframe,
     limit,
     symbols,
   };

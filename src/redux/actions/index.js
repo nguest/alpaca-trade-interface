@@ -17,10 +17,12 @@ import {
 } from './saveLiveData';
 
 import {
-  createTransaction,
-  createTransactionErrored,
-  createTransactionSucceeded,
-} from './createTransaction';
+  createOrder,
+} from './createOrder';
+
+import {
+ getOrders,
+} from './getOrders';
 
 import {
   getAccountData,
@@ -34,14 +36,17 @@ import {
   getClock,
 } from './getClock';
 
+import {
+  saveTradeUpdate,
+} from './saveTradeUpdate';
+
 import createNotification from './createNotification';
 
 const actions = {
   createNotification,
-  createTransaction,
-  createTransactionErrored,
-  createTransactionSucceeded,
+  createOrder,
   getClock,
+  getOrders,
   requestLogin,
   requestLoginErrored,
   requestLoginSucceeded,
@@ -52,6 +57,7 @@ const actions = {
   saveLiveData,
   saveLiveDataErrored,
   saveLiveDataSucceeded,
+  saveTradeUpdate,
   updateConnectionStatus,
 };
 

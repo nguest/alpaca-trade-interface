@@ -7,18 +7,20 @@ import Button from '../../Button';
 import styles from './styles';
 
 const TradeBox = ({
-  currentAddress,
-  onCreateTransaction,
+  onCreateOrder,
+  ticker,
 }) => {
-  const [toAddress, setToAddress] = useState('');
-  const [amount, setAmount] = useState(0);
-
-  const onClickButton = () => {
-    if (!toAddress || amount <= 0) return;
-    onCreateTransaction({
-      fromAddress: currentAddress,
-      toAddress,
-      amount,
+  const [qty, setQty] = useState(0);
+//x
+// symbol, qty, side, type, time_in_force,
+  const onClickButton = (side) => {
+    if (qty <= 0) return;
+    onCreateOrder({
+      symbol: ticker,
+      qty,
+      side,
+      type: 'market',
+      time_in_force: 'gtc',
     });
   };
 
@@ -28,26 +30,24 @@ const TradeBox = ({
         <h3 css={styles.h3}>Trade</h3>
       </header>
       <fieldset css={styles.form}>
-        <label htmlFor="to-address">Destination Address</label>
-        <input
-          css={styles.input}
-          type="text"
-          id="to-address"
-          value={toAddress}
-          onChange={(e) => setToAddress(e.target.value)}
-        />
-        <label htmlFor="amount">Amount to Send</label>
+        <label htmlFor="qty">Qty</label>
         <input
           css={styles.input}
           type="number"
-          id="amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          id="qty"
+          value={qty}
+          onChange={(e) => setQty(e.target.value)}
+        />
+
+        <Button
+          disabled={qty <= 0}
+          label="Sell"
+          onClick={() => onClickButton('sell')}
         />
         <Button
-          disabled={!toAddress.length && amount >= 0}
-          label="Send"
-          onClick={onClickButton}
+          disabled={qty <= 0}
+          label="Buy"
+          onClick={() => onClickButton('buy')}
         />
       </fieldset>
     </section>
@@ -55,8 +55,8 @@ const TradeBox = ({
 };
 
 TradeBox.propTypes = {
-  currentAddress: string,
-  onCreateTransaction: func,
+  ticker: string,
+  onCreateOrder: func,
 };
 
 export default TradeBox;

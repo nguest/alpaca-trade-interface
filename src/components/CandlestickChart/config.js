@@ -10,7 +10,7 @@ const d3config = {
   margin: {
     top: spacing.unit * 2,
     right: spacing.unit * 2,
-    bottom: spacing.unit * 2,
+    bottom: spacing.unit * 3,
     left: spacing.unit * 8,
   },
 };
