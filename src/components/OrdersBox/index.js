@@ -8,6 +8,11 @@ import Icon from '../Icon';
 
 import styles from './styles';
 
+const fillStatus = (o) => {
+  if (o.status === 'canceled') return '';
+  return o.filled_at ? `${o.filled_qty} / ${o.filled_avg_price}` : 'pending';
+};
+
 const OrdersBox = ({
   orders,
   onCancelOrder,
@@ -26,7 +31,6 @@ const OrdersBox = ({
   if (orders) {
     title = `Orders (${orders.length})`;
   }
-  console.log({ orders });
   
   return (
     <section css={styles.container(type)}>
@@ -45,37 +49,43 @@ const OrdersBox = ({
                   <td>name</td>
                   <td>order</td>
                   <td>qty</td>
-                  <td>created_at</td>
+                  <td>created</td>
+                  <td>filled at</td>
                   <td>status</td>
                   <td>filled</td>
-                  <td />
+                  <td>cancel?</td>
                 </tr>
               </thead>
             )}
             <tbody>
-              { orders.map((o) => (
-                <tr key={o.created_at}>
-                  <td>{ o.symbol }</td>
-                  <td>
-                    { `${o.order_type} ${o.side}`}
-                  </td>
-                  <td>
-                    { o.qty }
-                  </td>
-                  <td>
-                    { format(new Date(o.created_at), 'MM/dd HH:mm:ss')}
-                  </td>
-                  <td>
-                    { o.status }
-                  </td>
-                  <td>
-                    { o.filled_at ? 'filled' : 'pending'}
-                  </td>
-                  <td className="hoverable" onClick={() => onCancelOrder(o.id)}>
-                    <Icon name="trash-bin-outline" />
-                  </td>
-                </tr>
-              ))}
+              { orders
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                .map((o) => (
+                  <tr key={o.created_at} css={styles.disabled(o.status === 'canceled')}>
+                    <td>{ o.symbol }</td>
+                    <td>
+                      { `${o.order_type} ${o.side}`}
+                    </td>
+                    <td>
+                      { o.qty }
+                    </td>
+                    <td>
+                      { format(new Date(o.created_at), 'MM/dd HH:mm:ss')}
+                    </td>
+                    <td>
+                      { o.filled_at && format(new Date(o.filled_at), 'MM/dd HH:mm:ss')}
+                    </td>
+                    <td>
+                      { o.status }
+                    </td>
+                    <td>
+                      { fillStatus(o) }
+                    </td>
+                    <td className="hoverable" onClick={() => onCancelOrder(o.id)}>
+                      { (o.status !== 'canceled' && o.status !== 'filled') && <Icon name="trash-bin-outline" /> }
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </Fragment>

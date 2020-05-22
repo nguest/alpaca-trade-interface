@@ -13,7 +13,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gridColumn: '1 / span 1',
-    gridRow: '8 / span 3',
+    gridRow: '4 / span 4',
   },
   header: {
     alignItems: 'center',
@@ -27,9 +27,13 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
     flex: 1,
-    fontSize: '1.4rem',
-    justifyContent: 'center',
+    fontSize: '1.2rem',
+    lineHeight: 1,
   },
+  smallHeader: {
+    fontSize: '0.8rem',
+    lineHeight: 1,
+  }
 };
 
 export default styles;

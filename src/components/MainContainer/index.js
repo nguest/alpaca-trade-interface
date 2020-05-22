@@ -26,7 +26,7 @@ const MainContainer = (props) => {
         <Link to="/"><Icon name="home-outline" /></Link>
         <Link to="/orders"><Icon name="book-outline" /></Link>
       </aside>
-      <Route component={<LoginPage {...props} />} path="/bah" exact />
+      <Route component={<LoginPage {...props} />} path="/login" exact />
       <Route component={<MainPage {...props} />} path="/" exact />
       <Route component={<OrdersPage {...props} />} path="/orders" exact />
       { notification

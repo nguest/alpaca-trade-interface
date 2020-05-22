@@ -11,6 +11,7 @@ const LoginForm = ({
   onRequestLogin,
 }) => {
   const [address, setAddress] = useState('');
+  const [password, setPassword] = useState('');
 
   const onClickButton = () => {
     if (!address.length) return;
@@ -19,14 +20,23 @@ const LoginForm = ({
 
   return (
     <fieldset css={styles.form}>
-      <label htmlFor="login-form">Jobcoin Address</label>
+      <label htmlFor="login-username">Username</label>
       <input
         css={styles.input}
         type="text"
-        placeholder="enter address"
-        id="login-form"
+        placeholder="enter username"
+        id="login-username"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
+      />
+      <label htmlFor="login-password">Password</label>
+      <input
+        css={styles.input}
+        type="password"
+        placeholder="enter password"
+        id="login-password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
       <Button
         disabled={!address.length}

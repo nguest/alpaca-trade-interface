@@ -56,9 +56,6 @@ module.exports = function(webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
-  const cesiumSource = 'node_modules/cesium/Source';
-  const cesiumWorkers = '../Build/Cesium/Workers';
-
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
@@ -257,13 +254,6 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
-        //cesium: path.resolve(__dirname, cesiumSource),
-        // cesium$: "cesium/Cesium",
-
-        // cesiumSource: "cesium",
-        cesium$: 'cesium/Cesium',
-        cesium: 'cesium/Source',
-
       },
       // plugins: [
        
@@ -566,20 +556,6 @@ module.exports = function(webpackEnv) {
       // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
       // You can remove this if you don't use Moment.js:
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-
-      
-      new HtmlWebpackPlugin({
-        template: 'public/index.html',
-        scripts: ['cesium/Cesium.js'],
-      }),
-      // Copy Cesium Assets, Widgets, and Workers to a static directory
-      new CopyWebpackPlugin([{ from: path.join(cesiumSource, cesiumWorkers), to: 'Workers', force: true }]),
-      new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Assets'), to: 'Assets' }]),
-      new CopyWebpackPlugin([{ from: path.join(cesiumSource, 'Widgets'), to: 'Widgets' }]),
-      new webpack.DefinePlugin({
-        // Define relative base path in cesium for loading assets
-        CESIUM_BASE_URL: isEnvDevelopment ? JSON.stringify('../') : JSON.stringify('../client/build/'),
-      }),
       
 
       // Generate a service worker script that will precache, and keep up to date,

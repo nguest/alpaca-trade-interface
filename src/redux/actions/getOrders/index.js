@@ -18,7 +18,7 @@ export const getOrders = () => (dispatch) => {
     'APCA-API-SECRET-KEY': process.env.REACT_APP_ALPACA_API_SECRET,
   };
 
-  axios.get('https://paper-api.alpaca.markets/v2/orders', { headers })
+  axios.get('https://paper-api.alpaca.markets/v2/orders?status=all', { headers })
     .then((response) => {
       if (response.status === 200) {
         dispatch(getOrdersSucceeded(response.data));

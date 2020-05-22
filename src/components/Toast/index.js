@@ -13,7 +13,7 @@ const Toast = ({
   const setTimer = () => {
     timerRef.current = setTimeout(() => {
       setIsActive(false);
-    }, 5000);
+    }, 3000);
   };
 
   useEffect(() => {

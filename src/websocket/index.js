@@ -109,7 +109,7 @@ const auth = {
 const listenData = {
   action: 'listen',
   data: {
-    streams: ['T.AAPL'],//, 'Q.AAPL', 'AM.AAPL'],
+    streams: ['T.AAPL', 'Q.AAPL', 'Q.MSFT'],// 'AM.AAPL'],
   },
 };
 
@@ -154,19 +154,30 @@ const WebsocketSubscriber = ({ dispatch }) => {
     case 'authorization':
       if (msg.data.status === 'authorized') {
         console.info('AUTHORIZED: ATTEMPT OPEN LISTENING STREAM');
-        return ws.send(JSON.stringify(listenData));
+        ws.send(JSON.stringify(listenData));
+        //return ws.send(JSON.stringify(listenTradeUpdates));
+
       }
       return false;
     case 'listening':
-      console.info('OPENED LISTENING STREAM');
+      console.info('OPENED LISTENING STREAM', msg);
       return dispatch(actions.updateConnectionStatus({ stream: msg.data.streams }));
-    case 'ummm': {
-      const ticker = msg.stream.split('.').pop();
-      return dispatch(actions.saveLiveData({ ticker, data: msg.data }));
-    }
     case 'trade_updates':
+      console.log('trade_updates');
+      
       return dispatch(actions.saveTradeUpdate(msg.data));
-    default:
+    default: {
+      const str = msg.stream.split('.')//;.pop();
+      const ticker = str[1];
+      const type =  str[0];
+      console.log({ ticker, type });
+      if (type === 'T') {
+        return dispatch(actions.saveLiveData({ ticker, data: msg.data }));
+      }
+      if (type === 'Q') {
+        return dispatch(actions.saveLiveQuote({ ticker, data: msg.data }));
+      }
+    }
     }
   });
   return null;

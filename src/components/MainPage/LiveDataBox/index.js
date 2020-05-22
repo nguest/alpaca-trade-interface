@@ -20,7 +20,6 @@ const LiveDataBox = ({
     price = liveData.p;
     title = ticker;
   }
-  console.log('ttt',format(new Date(1589918457110369500 * 0.001), 'HH:mm:ss'))
 
   useEffect(() => {
     if (liveData) {

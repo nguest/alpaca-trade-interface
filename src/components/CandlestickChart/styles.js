@@ -6,7 +6,7 @@ import spacing from '../../styles/spacing';
 const styles = {
   container: {
     border: `1px solid ${colors.text}`,
-    gridColumn: '2 / span 3',
+    gridColumn: '2 / span 4',
     gridRow: '1 / span 7',
   },
   header: {

@@ -48,6 +48,10 @@ import {
   saveTradeUpdate,
 } from './saveTradeUpdate';
 
+import {
+  saveLiveQuote,
+} from './saveLiveQuote';
+
 import createNotification from './createNotification';
 
 const actions = {
@@ -67,6 +71,7 @@ const actions = {
   saveLiveData,
   saveLiveDataErrored,
   saveLiveDataSucceeded,
+  saveLiveQuote,
   saveTradeUpdate,
   updateConnectionStatus,
 };

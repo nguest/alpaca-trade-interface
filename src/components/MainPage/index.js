@@ -6,7 +6,7 @@ import LiveDataBox from './LiveDataBox';
 import TradeBox from './TradeBox';
 import Orders from '../../containers/Orders';
 import Account from '../../containers/Account';
-import LiveDataStreams from './LiveDataStreams';
+import LiveQuotes from '../../containers/LiveQuotes';
 import Status from '../../containers/Status';
 import Header from '../Header';
 import styles from './styles';
@@ -26,13 +26,13 @@ const MainPage = ({
   const [duration, setDuration] = useState(Object.keys(scales)[0]);
 
   useEffect(() => {
-    onRequestHistoricalData({ ...scales.duration, symbols: ticker });
+    onRequestHistoricalData({ ...scales[duration], symbols: ticker });
     return () => {};
   }, [ticker]);
 
   const onRequestTicker = (theTicker) => {
     setTicker(theTicker);
-    onRequestHistoricalData({ ...scales.duration, symbols: theTicker });
+    onRequestHistoricalData({ ...scales[duration], symbols: theTicker });
   };
 
   const onRequestDuration = (theDuration) => {
@@ -58,7 +58,7 @@ const MainPage = ({
           timeSeriesData={historicalData[ticker]}
           ticker={ticker}
         />
-        <LiveDataStreams />
+        <LiveQuotes />
       </div>
       <Status />
     </main>

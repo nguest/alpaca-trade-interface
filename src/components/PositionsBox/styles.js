@@ -15,11 +15,13 @@ const styles = {
     gridColumn: type === 'compact' ? '3 / span 3' : '1 / span 1',
     gridRow: type === 'compact' ? '8 / span 3' : '2 / span 1',
     overflowY: 'scroll',
+    position: 'relative',
   }),
   header: {
     borderBottom: `1px solid ${colors.text}`,
     display: 'flex',
     height: spacing.unit * 6,
+    minHeight: spacing.unit * 6,
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -36,6 +38,15 @@ const styles = {
   coloredSpan: (val) => ({
     color: val ? colors.error : colors.ok,
   }),
+  PLsum: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    borderTop: `1px solid ${colors.text}`,
+    background: colors.mg,
+    padding: spacing.unit,
+    fontSize: '1.25rem',
+  }
 };
 
 export default styles;

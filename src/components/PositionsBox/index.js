@@ -27,6 +27,7 @@ const PositionsBox = ({
   const pctChange = (pos) => ((100 * (pos.current_price - pos.avg_entry_price)) / pos.avg_entry_price).toFixed(2);
   const absChange = (pos) => ((pos.current_price - pos.avg_entry_price).toFixed(2));
   console.log({ positions });
+  const getPLSum = (posns) => posns.reduce((sum, curr) => (sum + parseFloat(curr.unrealized_pl)), 0).toFixed(2);
   
   return (
     <section css={styles.container(type)}>
@@ -90,8 +91,7 @@ const PositionsBox = ({
               ))}
             </tbody>
           </table>
-          <div css={styles.balance}>{ positions.buying_power }</div>
-          <div css={styles.balance}>{ positions.cash }</div>
+          <div css={styles.PLsum}>{ getPLSum(positions) }</div>
         </Fragment>
       )}
     </section>

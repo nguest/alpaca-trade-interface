@@ -20,6 +20,7 @@ const styles = {
     borderBottom: `1px solid ${colors.text}`,
     display: 'flex',
     height: spacing.unit * 6,
+    minHeight: spacing.unit * 6,
     justifyContent: 'center',
     width: '100%',
     alignItems: 'center',
@@ -33,6 +34,11 @@ const styles = {
     ...tables,
     fontSize: '1em',
   },
+  disabled: (val) => ({
+    td: {
+      color: val ? colors.mg : colors.text,
+    }
+  })
 
 };
 

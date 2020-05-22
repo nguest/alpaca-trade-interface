@@ -31,6 +31,14 @@ const reducer = (state = initialState, action = {}) => {
         [action.ticker]: action.data,
       },
     };
+  case 'SAVE_LIVE_QUOTE_SUCCEEDED':
+    return {
+      ...state,
+      liveQuotes: {
+        ...state.liveQuotes,
+        [action.ticker]: action.data,
+      },
+    };
   case 'SAVE_TRADE_UPDATE_SUCCEEDED':
     return {
       ...state,
@@ -47,6 +55,8 @@ const reducer = (state = initialState, action = {}) => {
       clock: action.data,
     };
   case 'UPDATE_CONNECTION_STATUS_SUCCEEDED':
+    console.log({ 1: state.connectionStatus, 2: action.status  });
+    
     return {
       ...state,
       connectionStatus: {
