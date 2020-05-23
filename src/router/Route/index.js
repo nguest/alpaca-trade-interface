@@ -20,8 +20,10 @@ class Route extends Component {
   }
 
   handlePop = () => this.forceUpdate();
-
+  
   render() {
+    console.log({ p: this.props.component.props });
+
     const { path, exact, component, render } = this.props;
 
     const match = matchPath(location.pathname, { path, exact });

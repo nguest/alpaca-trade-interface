@@ -19,3 +19,10 @@ export const useInterval = (callback, delay) => {
     }
   }, [delay]);
 };
+
+export const getPersistedUser = () => {
+  const userKey = Object.keys(window.sessionStorage)
+    .filter((it) => it.startsWith('firebase:authUser'))[0];
+  const user = userKey ? JSON.parse(sessionStorage.getItem(userKey)) : undefined;
+  return user;
+};

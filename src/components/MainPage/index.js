@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import React, { useEffect, useState } from 'react';
-import { func, string, object } from 'prop-types';
+import { func, object } from 'prop-types';
 import LiveDataBox from './LiveDataBox';
 import TradeBox from './TradeBox';
 import Orders from '../../containers/Orders';
@@ -15,12 +15,14 @@ import CandlestickChart from '../CandlestickChart';
 
 const MainPage = ({
   clock,
+  firebase,
   liveData,
-  currentAddress,
   onCreateOrder,
   onRequestClock,
   onRequestHistoricalData,
+  onRequestLogout,
   historicalData,
+  user,
 }) => {
   const [ticker, setTicker] = useState('AAPL');
   const [duration, setDuration] = useState(Object.keys(scales)[0]);
@@ -42,7 +44,13 @@ const MainPage = ({
 
   return (
     <main css={styles.main}>
-      <Header currentAddress={currentAddress} clock={clock} onRequestClock={onRequestClock} />
+      <Header
+        user={user}
+        clock={clock}
+        firebase={firebase}
+        onRequestClock={onRequestClock}
+        onRequestLogout={onRequestLogout}
+      />
       <div css={styles.mainGrid}>
         <LiveDataBox liveData={liveData && liveData[ticker]} ticker={ticker} />
         <Orders type="compact" />
@@ -67,12 +75,14 @@ const MainPage = ({
 
 MainPage.propTypes = {
   clock: object,
+  firebase: object,
   liveData: object,
-  currentAddress: string,
   onCreateOrder: func,
   onRequestClock: func,
   onRequestHistoricalData: func,
+  onRequestLogout: func,
   historicalData: object,
+  user: object,
 };
 
 export default MainPage;

@@ -20,6 +20,18 @@ const styles = {
     gridTemplateRows: '1fr 1fr',
     gridAutoRows: '1fr',
   },
+  login: {
+    ...typography.base,
+    background: `linear-gradient(45deg, ${colors.bg[0]},${colors.bg[1]})`,
+    boxSizing: 'border-box',
+    color: colors.text,
+    fontFamily: '"Be Vietnam", monospace',
+    fontSize: 12,
+    height: '100%',
+    overflow: 'hidden',
+    width: '100%',
+    display: 'grid',
+  },
   sidebar: {
     borderRight: `1px solid ${colors.text}`,
     display: 'flex',

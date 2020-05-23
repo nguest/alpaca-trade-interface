@@ -2,16 +2,16 @@
 import { jsx } from '@emotion/core';
 import React from 'react';
 import { func } from 'prop-types';
-import LoginForm from './LoginForm';
+import Login from '../../containers/Login';
 import styles from './styles';
 
 const LoginPage = ({
-  onRequestLogin,
+  firebase,
 }) => (
   <main css={styles.main}>
     <section css={styles.loginContainer}>
       <h2>welcome! sign in</h2>
-      <LoginForm onRequestLogin={onRequestLogin} />
+      <Login firebase={firebase} />
     </section>
   </main>
 );

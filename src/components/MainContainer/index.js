@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/core';
 import React, { useEffect, useState } from 'react';
-import { array } from 'prop-types';
+import { array, object } from 'prop-types';
 import Toast from '../Toast';
 import styles from './styles';
 import Icon from '../Icon';
@@ -11,6 +11,7 @@ import OrdersPage from '../OrdersPage';
 
 import Route from '../../router/Route';
 import Link from '../../router/Link';
+import { historyPush } from '../../router';
 
 
 const MainContainer = (props) => {
@@ -19,6 +20,18 @@ const MainContainer = (props) => {
     setNotification(props.notifications[0]);
   }, [props.notifications.length]);
 
+  if (!props.user) {
+    historyPush('/login');
+    return (
+      <div css={styles.login}>
+        <Global styles={styles.global} />
+        <Route component={<LoginPage {...props} />} path="/login" exact />
+        { notification
+        && <Toast {...notification} /> }
+      </div>
+    );
+  }
+
   return (
     <div css={styles.app}>
       <Global styles={styles.global} />
@@ -26,7 +39,6 @@ const MainContainer = (props) => {
         <Link to="/"><Icon name="home-outline" /></Link>
         <Link to="/orders"><Icon name="book-outline" /></Link>
       </aside>
-      <Route component={<LoginPage {...props} />} path="/login" exact />
       <Route component={<MainPage {...props} />} path="/" exact />
       <Route component={<OrdersPage {...props} />} path="/orders" exact />
       { notification
@@ -37,6 +49,7 @@ const MainContainer = (props) => {
 
 MainContainer.propTypes = {
   notifications: array,
+  user: object,
 };
 
 export default MainContainer;

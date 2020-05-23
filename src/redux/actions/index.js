@@ -1,8 +1,10 @@
 import {
   requestLogin,
-  requestLoginErrored,
-  requestLoginSucceeded,
 } from './requestLogin';
+
+import {
+  requestLogout,
+} from './requestLogout';
 
 import {
   getHistoricalData,
@@ -61,8 +63,7 @@ const actions = {
   getClock,
   getOrders,
   requestLogin,
-  requestLoginErrored,
-  requestLoginSucceeded,
+  requestLogout,
   getAccountData,
   getHistoricalData,
   getHistoricalDataErrored,

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import React, { useState } from 'react';
-import { func } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { func, object } from 'prop-types';
 import Button from '../../Button';
 
 import styles from './styles';
@@ -9,13 +9,18 @@ import styles from './styles';
 
 const LoginForm = ({
   onRequestLogin,
+  firebase,
 }) => {
-  const [address, setAddress] = useState('');
+  const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    onRequestLogin({ user: null, password: null, firebase });
+  }, []);
+  
   const onClickButton = () => {
-    if (!address.length) return;
-    onRequestLogin(address);
+    if (!user.length) return;
+    onRequestLogin({ user, password, firebase });
   };
 
   return (
@@ -26,8 +31,8 @@ const LoginForm = ({
         type="text"
         placeholder="enter username"
         id="login-username"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
+        value={user}
+        onChange={(e) => setUser(e.target.value)}
       />
       <label htmlFor="login-password">Password</label>
       <input
@@ -39,7 +44,7 @@ const LoginForm = ({
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button
-        disabled={!address.length}
+        disabled={!user.length}
         label="Sign In"
         onClick={onClickButton}
       />
@@ -48,6 +53,7 @@ const LoginForm = ({
 };
 
 LoginForm.propTypes = {
+  firebase: object,
   onRequestLogin: func,
 };
 

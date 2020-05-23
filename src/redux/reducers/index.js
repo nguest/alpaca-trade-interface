@@ -7,6 +7,7 @@ export const initialState = {
     stream: false,
   },
   newOrders: [],
+  user: null,
 };
 
 // TODO: Split reducer into many
@@ -15,8 +16,15 @@ const reducer = (state = initialState, action = {}) => {
   case 'REQUEST_LOGIN_SUCCEEDED':
     return {
       ...state,
+      user: { email: action.email },
+    };
+  case 'REQUEST_LOGOUT_SUCCEEDED':
+    return {
+      ...state,
+      user: null,
     };
   case 'REQUEST_LOGIN_ERRORED':
+  case 'REQUEST_LOGOUT_ERRORED':
   case 'GET_HISTORICAL_DATA_ERRORED':
   case 'CREATE_ORDER_ERRORED':
     return { ...state, lastError: action.error };
