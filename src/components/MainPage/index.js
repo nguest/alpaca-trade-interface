@@ -14,10 +14,12 @@ import { scales } from './helpers';
 import CandlestickChart from '../CandlestickChart';
 
 const MainPage = ({
+  assets,
   clock,
   firebase,
   liveData,
   onCreateOrder,
+  onRequestAssets,
   onRequestClock,
   onRequestHistoricalData,
   onRequestLogout,
@@ -34,6 +36,8 @@ const MainPage = ({
 
   const onRequestTicker = (theTicker) => {
     setTicker(theTicker);
+    console.log({ hello: theTicker });
+    
     onRequestHistoricalData({ ...scales[duration], symbols: theTicker });
   };
 
@@ -60,6 +64,8 @@ const MainPage = ({
         />
         <Account />
         <CandlestickChart
+          assets={assets}
+          onRequestAssets={onRequestAssets}
           onRequestDuration={onRequestDuration}
           onRequestTicker={onRequestTicker}
           duration={duration}

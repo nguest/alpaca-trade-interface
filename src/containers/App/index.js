@@ -16,6 +16,8 @@ const App = ({
   notifications,
   user,
   requestLogout,
+  getAssets,
+  assets,
 }) => (
   <MainContainer
     clock={clock}
@@ -29,10 +31,13 @@ const App = ({
     onRequestLogout={requestLogout}
     historicalData={historicalData}
     user={user}
+    assets={assets}
+    onRequestAssets={getAssets}
   />
 );
 
 const mapStateToProps = (state) => ({
+  assets: state.assets || [],
   clock: state.clock || null,
   historicalData: state.historicalData || { },
   liveData: state.liveData || null,
@@ -42,6 +47,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getClock: () => dispatch(actions.getClock()),
+  getAssets: () => dispatch(actions.getAssets()),
   getHistoricalData: (params) => dispatch(actions.getHistoricalData(params)),
   createOrder: (params) => dispatch(actions.createOrder(params)),
   requestLogout: (params) => dispatch(actions.requestLogout(params)),

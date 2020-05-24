@@ -27,6 +27,7 @@ const reducer = (state = initialState, action = {}) => {
   case 'REQUEST_LOGOUT_ERRORED':
   case 'GET_HISTORICAL_DATA_ERRORED':
   case 'CREATE_ORDER_ERRORED':
+  case 'GET_ASSETS_ERRORED':
     return { ...state, lastError: action.error };
   case 'GET_HISTORICAL_DATA_SUCCEEDED':
   case 'CREATE_TRANSACTION_SUCCEEDED':
@@ -94,6 +95,11 @@ const reducer = (state = initialState, action = {}) => {
     return {
       ...state,
       positions: action.data,
+    };
+  case 'GET_ASSETS_SUCCEEDED':
+    return {
+      ...state,
+      assets: action.data,
     };
   case 'CREATE_NOTIFICATION':
     return {

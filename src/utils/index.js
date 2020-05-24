@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export const useInterval = (callback, delay) => {
   const savedCallback = useRef();
@@ -14,7 +14,7 @@ export const useInterval = (callback, delay) => {
       savedCallback.current();
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
+      const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
@@ -25,4 +25,15 @@ export const getPersistedUser = () => {
     .filter((it) => it.startsWith('firebase:authUser'))[0];
   const user = userKey ? JSON.parse(sessionStorage.getItem(userKey)) : undefined;
   return user;
+};
+
+export const isLoggedIn = (firebase) => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in.
+      return true;
+    }
+    // No user is signed in.
+    return false;
+  });
 };

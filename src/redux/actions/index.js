@@ -54,12 +54,17 @@ import {
   saveLiveQuote,
 } from './saveLiveQuote';
 
+import {
+  getAssets,
+} from './getAssets';
+
 import createNotification from './createNotification';
 
 const actions = {
   cancelOrder,
   createNotification,
   createOrder,
+  getAssets,
   getClock,
   getOrders,
   requestLogin,
