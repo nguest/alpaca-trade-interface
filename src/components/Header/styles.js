@@ -18,8 +18,10 @@ const styles = {
     alignItems: 'center',
     display: 'flex',
   },
-  statusText: {
+  displayName: {
     marginLeft: spacing.unit,
+    marginRight: spacing.unit,
+    whiteSpace: 'nowrap',
   },
   link: {
     display: 'inline-flex',

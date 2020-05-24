@@ -1,11 +1,12 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import React from 'react';
-import { number, string, func } from 'prop-types';
+import { bool, number, string, func } from 'prop-types';
 
 import styles from './styles';
 
 const Icon = ({
+  hoverable,
   name,
   onClick,
   size = 24,
@@ -18,6 +19,7 @@ const Icon = ({
 );
 
 Icon.propTypes = {
+  hoverable: bool,
   name: string,
   onClick: func,
   size: number,

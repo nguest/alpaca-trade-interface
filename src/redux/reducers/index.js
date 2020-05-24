@@ -1,7 +1,6 @@
 export const initialState = {
   notifications: [],
   historicalData: null,
-  currentUser: null,
   connectionStatus: {
     connection: false,
     stream: false,
@@ -16,7 +15,7 @@ const reducer = (state = initialState, action = {}) => {
   case 'REQUEST_LOGIN_SUCCEEDED':
     return {
       ...state,
-      user: { email: action.email },
+      user: action.user,
     };
   case 'REQUEST_LOGOUT_SUCCEEDED':
     return {

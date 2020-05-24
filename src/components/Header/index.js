@@ -20,8 +20,8 @@ const Header = ({
       <MarketClock clock={clock} onRequestClock={onRequestClock} />
       <div css={styles.loginStatus}>
         <Icon name="person-circle-outline" />
-        <span css={styles.statusText}>{ `Signed In: ${user && user.email}` }</span>
-        <Button type="invisible" onClick={() => onRequestLogout({ firebase })} label="Sign out" />
+        <span css={styles.displayName}>{ user && user.displayName }</span>
+        <Icon onClick={() => onRequestLogout({ firebase })} name="log-out-outline" hoverable />
       </div>
     </header>
   );

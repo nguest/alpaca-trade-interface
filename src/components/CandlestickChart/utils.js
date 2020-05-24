@@ -2,30 +2,42 @@ import * as d3 from 'd3';
 import d3Config from './config';
 import colors from '../../styles/colors';
 import spacing from '../../styles/spacing';
+import { scales } from '../MainPage/helpers';
 
 const d3Utils = {
-  initializeChart: ({ timeSeriesData, dimensions }) => {
-    const formatDate = d3.utcFormat('%B %-d, %Y');
+  initializeChart: ({ timeSeriesData, dimensions, duration }) => {
+    const c = scales[duration]
+    console.log({ timeSeriesData });
+    
+
+    const formatDate = d3.timeFormat('%B %-d, %Y');
+    const formatDateWithTime = d3.timeFormat('%B %-d, %Y, %H:%M');
     const formatValue = d3.format('.2f');
     const formatChange = (y0, y1) => {
       const f = d3.format('+.2%');
       return f((y1 - y0) / y0);
     };
     const parseDate = d3.utcParse('%s');
+    const getTickValues = (dataIn, count) => {
+      const k = (count < 100) ? 5 : 20;
+      return dataIn.map((d) => d.t).filter((t, i) => i % k === 0);
+    };
+    const tickFormat = c.timeframe.indexOf('Min') !== -1 ? d3.timeFormat('%H:%M') : d3.utcFormat('%-m/%-d');
 
     const data = timeSeriesData.map((datum) => ({
       ...datum,
       t: parseDate(datum.t),
-
     }));
-
+    console.log({ data });
+    
     // build chart with margins
     const svg = d3.select('.line-chart');
 
     const x = d3.scaleBand()
       .domain(data.map((d) => d.t))
       .range([d3Config.margin.left, dimensions.width - d3Config.margin.right])
-      .paddingInner(0.2);
+      .paddingInner(0.2)
+      .paddingOuter(2);
 
     const y = d3.scaleLog()
       .domain([d3.min(data, (d) => d.l), d3.max(data, (d) => d.h)])
@@ -34,8 +46,8 @@ const d3Utils = {
     const xAxis = (g) => g
       .attr('transform', `translate(0,${dimensions.height - d3Config.margin.bottom})`)
       .call(d3.axisBottom(x)
-        .tickValues(data.map((d) => d.t).filter((t, i) => i % 5 === 0))
-        .tickFormat(d3.utcFormat('%-m/%-d')));
+        .tickValues(getTickValues(data, c.limit))
+        .tickFormat(tickFormat));
     // .call((g) => g.select('.domain').remove());
 
     const yAxis = (g) => g
@@ -67,9 +79,7 @@ const d3Utils = {
       .selectAll('g')
       .data(data)
       .join('g')
-      .attr('transform', (d) =>
-      // console.log(d.t, x(d.t))
-        `translate(${x(d.t)},0)`);
+      .attr('transform', (d) => `translate(${x(d.t)},0)`);
 
     g.append('line')
       .attr('y1', (d) => y(d.l))
@@ -80,17 +90,20 @@ const d3Utils = {
       .attr('y2', (d) => y(d.c))
       .attr('stroke-width', x.bandwidth())
       .attr('stroke', (d) => (
-        d.o > d.c ? d3.schemeSet1[0]
-          : d.c > d.o ? d3.schemeSet1[2]
+        d.o > d.c
+          ? d3.schemeSet1[0]
+          : d.c > d.o 
+            ? d3.schemeSet1[2]
             : d3.schemeSet1[8]));
 
     g.append('title')
-      .text((d) => `${formatDate(d.t)}
+      .text((d) => (
+        (c.timeframe.indexOf('Min') !== -1 ? `${formatDateWithTime(d.t)}` : `${formatDate(d.t)}`)
+        + `
         Open: ${formatValue(d.o)}
         Close: ${formatValue(d.c)} (${formatChange(d.o, d.c)})
         Low: ${formatValue(d.l)}
-        High: ${formatValue(d.h)}`);
-
+        High: ${formatValue(d.h)}`));
   },
 
   empty: () => {

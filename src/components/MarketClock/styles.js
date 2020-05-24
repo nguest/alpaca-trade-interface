@@ -10,7 +10,10 @@ const styles = {
       alignItems: 'center',
       display: 'flex',
       marginRight: spacing.unit,
-    }
+    },
+  },
+  statusText: {
+    marginLeft: spacing.unit,
   },
 };
 

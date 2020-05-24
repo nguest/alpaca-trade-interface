@@ -113,18 +113,6 @@ const listenData = {
   },
 };
 
-const str2ab = (str) => {
-  const buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
-  const bufView = new Uint16Array(buf);
-  for (let i=0, strLen = str.length; i < strLen; i++) {
-    bufView[i] = str.charCodeAt(i);
-  }
-  return buf;
-};
-
-const ab2str = (buf) => String.fromCharCode.apply(null, new Uint8Array(buf));
-
-
 const WebsocketSubscriber = ({ dispatch }) => {
   console.log('WebsocketSubscriber');
 
@@ -136,27 +124,27 @@ const WebsocketSubscriber = ({ dispatch }) => {
     ws.send(JSON.stringify(auth));
     dispatch(actions.updateConnectionStatus({ connection: true }));
   });
-  
+
   ws.addEventListener('close', () => {
     console.info('CLOSED WS CONNECTION');
     dispatch(actions.updateConnectionStatus({ stream: null, connection: false }));
   });
-  
+
   ws.addEventListener('message', (event) => {
-    
+
     //console.log('Message from server ', event.data);
     // let str = new TextDecoder(ENCODING).decode(event.data);
     // const str = parseInt(event.data).toString(2)
     //const str = ab2str(new Uint8Array(event.data)); - for trade data need to unbinary it
     const msg = JSON.parse(event.data);
     console.log('msg', msg);
+
     switch (msg.stream) {
     case 'authorization':
       if (msg.data.status === 'authorized') {
         console.info('AUTHORIZED: ATTEMPT OPEN LISTENING STREAM');
         ws.send(JSON.stringify(listenData));
         //return ws.send(JSON.stringify(listenTradeUpdates));
-
       }
       return false;
     case 'listening':
@@ -167,9 +155,9 @@ const WebsocketSubscriber = ({ dispatch }) => {
       
       return dispatch(actions.saveTradeUpdate(msg.data));
     default: {
-      const str = msg.stream.split('.')//;.pop();
+      const str = msg.stream.split('.');
       const ticker = str[1];
-      const type =  str[0];
+      const type = str[0];
       console.log({ ticker, type });
       if (type === 'T') {
         return dispatch(actions.saveLiveData({ ticker, data: msg.data }));

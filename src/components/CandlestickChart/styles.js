@@ -25,7 +25,8 @@ const styles = {
     height: `calc(100% - ${spacing.unit * 6}px)`,
   },
   svg: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    //backgroundColor: 'rgba(0,0,0,0.1)',
+    background: `linear-gradient(45deg, ${colors.mg}, ${colors.white})`,
     color: colors.text,
     overflow: 'visible',
   },

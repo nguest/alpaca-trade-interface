@@ -3,7 +3,10 @@
 const styles = {
   icon: (size) => ({
     fontSize: size,
-    color: 'green'
+    color: 'green',
+    '&:hover': {
+      background: 'red',
+    }
   }),
 };
 

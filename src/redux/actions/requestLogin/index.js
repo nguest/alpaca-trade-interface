@@ -7,18 +7,20 @@ export const requestLoginErrored = (error) => ({
   error,
 });
 
-export const requestLoginSucceeded = ({ email }) => ({
+export const requestLoginSucceeded = (user) => ({
   type: 'REQUEST_LOGIN_SUCCEEDED',
-  email,
+  user,
 });
 
 export const requestLogin = (params) => (dispatch) => {
   const user = getPersistedUser();
+
   if (user) {
     historyPush('/');
-    dispatch(requestLoginSucceeded({ email: user.email }));
+    dispatch(requestLoginSucceeded(user));
     return dispatch(createNotification({ noteType: 'OK', message: 'Login Succesful' }));
   }
+
 
   if (!params.user || !params.password || !params.password) return false;
 
@@ -27,7 +29,7 @@ export const requestLogin = (params) => (dispatch) => {
       params.firebase.auth().signInWithEmailAndPassword(params.user, params.password)
         .then((response) => {
           historyPush('/');
-          dispatch(requestLoginSucceeded({ email: response.user.email }));
+          dispatch(requestLoginSucceeded(response.user));
           return dispatch(createNotification({ noteType: 'OK', message: 'Login Succesful' }));
         })
         .catch((e) => {

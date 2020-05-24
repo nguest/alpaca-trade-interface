@@ -10,9 +10,9 @@ export const useInterval = (callback, delay) => {
 
   // Set up the interval.
   useEffect(() => {
-    function tick() {
+    const tick = () => {
       savedCallback.current();
-    }
+    };
     if (delay !== null) {
       const id = setInterval(tick, delay);
       return () => clearInterval(id);
@@ -37,3 +37,14 @@ export const isLoggedIn = (firebase) => {
     return false;
   });
 };
+
+export const str2ab = (str) => {
+  const buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
+  const bufView = new Uint16Array(buf);
+  for (let i=0, strLen = str.length; i < strLen; i++) {
+    bufView[i] = str.charCodeAt(i);
+  }
+  return buf;
+};
+
+export const ab2str = (buf) => String.fromCharCode.apply(null, new Uint8Array(buf));

@@ -26,7 +26,7 @@ const CandlestickChart = ({
   useEffect(() => {
     if (dimensions.width > 0 && timeSeriesData.length) {
       d3Utils.empty();
-      d3Utils.initializeChart({ timeSeriesData, dimensions });
+      d3Utils.initializeChart({ timeSeriesData, dimensions, duration });
     }
   }, [timeSeriesData, dimensions.width, dimensions.height]);
 

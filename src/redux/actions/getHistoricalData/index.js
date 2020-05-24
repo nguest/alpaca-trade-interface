@@ -12,7 +12,7 @@ export const getHistoricalDataSucceeded = (data) => ({
   data,
 });
 
-export const getHistoricalData = ({ timeframe = '1D', limit = 78, symbols }) => (dispatch) => {
+export const getHistoricalData = ({ timeframe = '1D', limit = 5, symbols }) => (dispatch) => {
   console.log('getHistoricalData', timeframe, limit, symbols);
   
   //const timeframe = '5Min';
@@ -20,6 +20,7 @@ export const getHistoricalData = ({ timeframe = '1D', limit = 78, symbols }) => 
   const before = '2020-04-15T09:30:00-04:00';
   const params = {
     //timeframe,
+    before: new Date(),
     limit,
     symbols,
   };
@@ -34,10 +35,10 @@ export const getHistoricalData = ({ timeframe = '1D', limit = 78, symbols }) => 
   axios.get(`https://cors-anywhere.herokuapp.com/https://data.alpaca.markets/v1/bars/${timeframe}`, { headers, params })
     .then((response) => {
       dispatch(getHistoricalDataSucceeded(response.data));
-      return dispatch(createNotification({ noteType: 'OK', message: 'Transactions loaded successfully' }));
+      return dispatch(createNotification({ noteType: 'OK', message: 'Data loaded successfully' }));
     })
     .catch((e) => {
       dispatch(getHistoricalDataErrored({ error: e }));
-      return dispatch(createNotification({ noteType: 'ERROR', message: 'Could not load transactions' }));
+      return dispatch(createNotification({ noteType: 'ERROR', message: 'Could not load data' }));
     });
 };
