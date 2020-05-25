@@ -46,7 +46,12 @@ const styles = {
     background: colors.mg,
     padding: spacing.unit,
     fontSize: '1.25rem',
-  }
+  },
+  spaced: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingRight: spacing.unit * 6,
+  },
 };
 
 export default styles;

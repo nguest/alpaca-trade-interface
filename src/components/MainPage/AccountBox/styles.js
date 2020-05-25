@@ -23,12 +23,21 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
   },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    padding: spacing.unit,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   balance: {
     alignItems: 'center',
+    justifyContent: 'center',
     display: 'flex',
     flex: 1,
     fontSize: '1.2rem',
-    lineHeight: 1,
+    //lineHeight: 1,
   },
   smallHeader: {
     fontSize: '0.8rem',

@@ -23,20 +23,22 @@ const AccountBox = ({
   
   return (
     <section css={styles.container}>
-      <div style={styles.header}>
+      <header style={styles.header}>
         <h3 css={styles.h3}>{ title }</h3>
-      </div>
-      { accountData && (
-        <Fragment>
-          <div css={styles.smallHeader}>Buying Power</div>
-          <div css={styles.balance}>{ commaNum(accountData.buying_power) }</div>
-          <div css={styles.smallHeader}>Cash</div>
-          <div css={styles.balance}>{ commaNum(accountData.cash) }</div>
-          <div css={styles.smallHeader}>Portfolio Value</div>
-          <div css={styles.balance}>{ commaNum(accountData.portfolio_value) }</div>
+      </header>
+      <div css={styles.content}>
+        { accountData && (
+          <Fragment>
+            <div css={styles.smallHeader}>Buying Power</div>
+            <div css={styles.balance}>{ commaNum(accountData.buying_power) }</div>
+            <div css={styles.smallHeader}>Cash</div>
+            <div css={styles.balance}>{ commaNum(accountData.cash) }</div>
+            <div css={styles.smallHeader}>Portfolio Value</div>
+            <div css={styles.balance}>{ commaNum(accountData.portfolio_value) }</div>
 
-        </Fragment>
-      )}
+          </Fragment>
+        )}
+      </div>
     </section>
   );
 };

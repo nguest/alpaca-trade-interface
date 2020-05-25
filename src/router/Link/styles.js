@@ -1,6 +1,7 @@
 /** @jsx jsx */
 
 import typography from '../../styles/typography';
+import colors from '../../styles/colors';
 import buttonStyles from '../../components/Button/styles';
 
 const styles = {
@@ -13,6 +14,8 @@ const styles = {
       a: {
         ...typography.base,
       },
+      //background: active ? colors.mg : 'transparent',
+      border: active ? `1px solid ${colors.mg}`: 'none',
       ...styleOverrides,
     };
   },

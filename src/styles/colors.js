@@ -6,7 +6,7 @@ const colors = {
   darkOverlay: 'rgba(0,0,0,0.7)',
   text: '#666666',
   active: '#656565',
-  hilite: '#ff3300',
+  hilite: '#ff835d',//'#ff3300',
   white: '#ffffff',
   ok: 'rgba(67,165,252,0.9)',
   error: '#ff0000',

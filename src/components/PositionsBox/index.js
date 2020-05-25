@@ -24,10 +24,14 @@ const PositionsBox = ({
     title = `Positions (${positions.length})`;
   }
 
-  const pctChange = (pos) => ((100 * (pos.current_price - pos.avg_entry_price)) / pos.avg_entry_price).toFixed(2);
-  const absChange = (pos) => ((pos.current_price - pos.avg_entry_price).toFixed(2));
-  console.log({ positions });
-  const getPLSum = (posns) => posns.reduce((sum, curr) => (sum + parseFloat(curr.unrealized_pl)), 0).toFixed(2);
+  const addSign = (num) => {
+    const res = num > 0 ? `+${num}` : `${num}`;
+    return res;
+  }
+
+  const pctChange = (pos) => addSign(((100 * (pos.current_price - pos.avg_entry_price)) / pos.avg_entry_price).toFixed(2));
+  const absChange = (pos) => addSign(((pos.current_price - pos.avg_entry_price).toFixed(2)));
+  const getPLSum = (posns) => addSign(posns.reduce((sum, curr) => (sum + parseFloat(curr.unrealized_pl)), 0).toFixed(2));
   
   return (
     <section css={styles.container(type)}>
@@ -66,17 +70,19 @@ const PositionsBox = ({
                     { p.avg_entry_price }
                   </td>
                   <td>
-                    { p.current_price }
-                    {
-                      <span css={styles.coloredSpan(absChange(p) < 0)}>
-                        { `(${absChange(p)})` }
-                      </span>
-                    }
-                    {
-                      <span css={styles.coloredSpan(absChange(p) < 0)}>
-                        { `(${pctChange(p)}%)` }
-                      </span>
-                    }
+                    <div css={styles.spaced}>
+                      { p.current_price }
+                      {
+                        <span css={styles.coloredSpan(absChange(p) < 0)}>
+                          { `(${absChange(p)})` }
+                        </span>
+                      }
+                      {
+                        <span css={styles.coloredSpan(absChange(p) < 0)}>
+                          { `(${pctChange(p)}%)` }
+                        </span>
+                      }
+                    </div>
                   </td>
                   <td>
                     { p.cost_basis }
@@ -85,7 +91,7 @@ const PositionsBox = ({
                     { p.market_value }
                   </td>
                   <td className={p.unrealized_pl < 0 ? 'error' : 'ok'}>
-                    { parseFloat(p.unrealized_pl).toFixed(2) }
+                    { addSign(parseFloat(p.unrealized_pl).toFixed(2)) }
                   </td>
                 </tr>
               ))}

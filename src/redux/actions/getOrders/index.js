@@ -22,7 +22,7 @@ export const getOrders = () => (dispatch) => {
     .then((response) => {
       if (response.status === 200) {
         dispatch(getOrdersSucceeded(response.data));
-        return dispatch(createNotification({ noteType: 'OK', message: 'Orders fetched successfully' }));
+        //return dispatch(createNotification({ noteType: 'OK', message: 'Orders fetched successfully' }));
       }
       return null;
     })

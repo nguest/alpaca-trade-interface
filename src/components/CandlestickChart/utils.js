@@ -1,14 +1,10 @@
 import * as d3 from 'd3';
 import d3Config from './config';
-import colors from '../../styles/colors';
-import spacing from '../../styles/spacing';
 import { scales } from '../MainPage/helpers';
 
 const d3Utils = {
   initializeChart: ({ timeSeriesData, dimensions, duration }) => {
-    const c = scales[duration]
-    console.log({ timeSeriesData });
-    
+    const c = scales[duration];
 
     const formatDate = d3.timeFormat('%B %-d, %Y');
     const formatDateWithTime = d3.timeFormat('%B %-d, %Y, %H:%M');
@@ -28,8 +24,6 @@ const d3Utils = {
       ...datum,
       t: parseDate(datum.t),
     }));
-    console.log({ data });
-    
     // build chart with margins
     const svg = d3.select('.line-chart');
 
@@ -47,7 +41,8 @@ const d3Utils = {
       .attr('transform', `translate(0,${dimensions.height - d3Config.margin.bottom})`)
       .call(d3.axisBottom(x)
         .tickValues(getTickValues(data, c.limit))
-        .tickFormat(tickFormat));
+        .tickFormat(tickFormat)
+        .tickSizeOuter(0));
     // .call((g) => g.select('.domain').remove());
 
     const yAxis = (g) => g
@@ -89,17 +84,19 @@ const d3Utils = {
       .attr('y1', (d) => y(d.o))
       .attr('y2', (d) => y(d.c))
       .attr('stroke-width', x.bandwidth())
-      .attr('stroke', (d) => (
-        d.o > d.c
-          ? d3.schemeSet1[0]
-          : d.c > d.o 
-            ? d3.schemeSet1[2]
-            : d3.schemeSet1[8]));
+      .attr('stroke', (d) => {
+        if (d.o > d.c) {
+          return d3.schemeSet1[0];
+        }
+        if (d.o < d.c) {
+          return d3.schemeSet1[2];
+        }
+        return d3.schemeSet1[8];
+      });
 
     g.append('title')
       .text((d) => (
-        (c.timeframe.indexOf('Min') !== -1 ? `${formatDateWithTime(d.t)}` : `${formatDate(d.t)}`)
-        + `
+        `${(c.timeframe.indexOf('Min') !== -1 ? formatDateWithTime(d.t) : formatDate(d.t))}
         Open: ${formatValue(d.o)}
         Close: ${formatValue(d.c)} (${formatChange(d.o, d.c)})
         Low: ${formatValue(d.l)}

@@ -37,13 +37,20 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    padding: `${spacing.unit * 4} 0`,
+    padding: `${spacing.unit * 2} 0`,
+    width: spacing.unit * 10,
     a: {
       display: 'flex',
-      width: '100%',
+      width: 60,
       justifyContent: 'center',
       height: spacing.unit * 6,
+      alignItems: 'center',
     },
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    marginBottom: spacing.unit * 6,
   },
   global: {
     a: {

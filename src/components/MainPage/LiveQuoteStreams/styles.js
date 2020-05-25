@@ -31,14 +31,13 @@ const styles = {
     fontSize: '0.8rem',
     '> thead tr': {
       borderBottom: `1px solid ${colors.text}`,
-
-
     },
     td: {
       width: 50,
       maxWidth: 50,
       minWidth: 50,
-    }
+      padding: `${spacing.unit * 0.5} ${spacing.unit}`,
+    },
   }
 };
 

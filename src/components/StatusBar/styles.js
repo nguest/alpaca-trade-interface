@@ -14,8 +14,8 @@ const styles = {
     justifyContent: 'space-between',
     position: 'absolute',
     bottom: 0,
-    left: 0,
-    width: '100%',
+    right: 0,
+    width: `calc(100% - ${spacing.unit * 10}px)`,
   },
   statusBlock: {
     marginRight: spacing.unit,

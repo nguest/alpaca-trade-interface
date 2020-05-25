@@ -40,8 +40,12 @@ const styles = {
   buttonContainer: {
     display: 'flex',
     button: {
-      width: `calc(50% - ${spacing.unit * 0.5}`,
-    }
+      display: 'block',
+      width: `calc(50% - ${spacing.unit * 0.5}px)`,
+      '&:first-of-type': {
+        marginRight: spacing.unit,
+      },
+    },
   }
 };
 

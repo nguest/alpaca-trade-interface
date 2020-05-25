@@ -36,8 +36,9 @@ const MainContainer = (props) => {
     <div css={styles.app}>
       <Global styles={styles.global} />
       <aside css={styles.sidebar}>
-        <Link to="/"><Icon name="home-outline" /></Link>
-        <Link to="/orders"><Icon name="book-outline" /></Link>
+        <img src="/images/alpaca.svg" alt="Alpaca Logo" css={styles.logo} />
+        <Link to="/" active={location.pathname === '/'}><Icon name="home-outline" /></Link>
+        <Link to="/orders" active={location.pathname === '/orders'}><Icon name="book-outline" /></Link>
       </aside>
       <Route component={<MainPage {...props} />} path="/" exact />
       <Route component={<OrdersPage {...props} />} path="/orders" exact />
