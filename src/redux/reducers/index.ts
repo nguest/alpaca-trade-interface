@@ -1,18 +1,28 @@
-export const initialState = {
+import { RootState } from './types';
+import { Action } from 'redux';
+import * as at from '../actions/actionTypes';
+
+
+export const initialState: RootState = {
+  accountData: {},
   notifications: [],
-  historicalData: null,
+  historicalData: {},
   connectionStatus: {
     connection: false,
     stream: false,
   },
   newOrders: [],
-  user: null,
+  user: {},
+  liveData: {},
+  liveQuotes: {},
+  tradeUpdates: [],
+  orders: [],
 };
 
 // TODO: Split reducer into many
-const reducer = (state = initialState, action = {}) => {
+const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
-  case 'REQUEST_LOGIN_SUCCEEDED':
+  case at.REQUEST_LOGIN_SUCCEEDED:
     return {
       ...state,
       user: action.user,
@@ -27,6 +37,7 @@ const reducer = (state = initialState, action = {}) => {
   case 'GET_HISTORICAL_DATA_ERRORED':
   case 'CREATE_ORDER_ERRORED':
   case 'GET_ASSETS_ERRORED':
+  case at.GET_ACCOUNT_DATA_ERRORED:
     return { ...state, lastError: action.error };
   case 'GET_HISTORICAL_DATA_SUCCEEDED':
   case 'CREATE_TRANSACTION_SUCCEEDED':
@@ -55,7 +66,7 @@ const reducer = (state = initialState, action = {}) => {
         action.data,
       ],
     };
-  case 'GET_ACCOUNT_DATA_SUCCEEDED':
+  case at.GET_ACCOUNT_DATA_SUCCEEDED:
     return { ...state, accountData: action.data };
   case 'GET_CLOCK_SUCCEEDED':
     return {

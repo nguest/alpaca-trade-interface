@@ -16,17 +16,17 @@ const firebaseConfig = {
   storageBucket: 'alpaca-trade-interface.appspot.com',
   messagingSenderId: '214804315862',
   appId: '1:214804315862:web:213174522a13596f141377',
-  measurementId: 'G-4DZBQ8RHEN'
+  measurementId: 'G-4DZBQ8RHEN',
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const fireBaseApp = firebase.initializeApp(firebaseConfig);
 
 const rootElement = document.getElementById('root');
 
 ReactDOM.render((
   <Provider store={store}>
     <WebsocketSubscriber />
-    <App firebase={firebase} />
+    <App firebase={fireBaseApp} />
   </Provider>
 ), rootElement);

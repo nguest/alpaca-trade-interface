@@ -95,7 +95,7 @@ checkBrowsers(paths.appPath, isInteractive)
       useYarn,
       useTypeScript,
       webpack,
-    });
+    });    
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic);
@@ -127,6 +127,7 @@ checkBrowsers(paths.appPath, isInteractive)
       }
 
       console.log(chalk.cyan('Starting the development server...\n'));
+
       openBrowser(urls.localUrlForBrowser);
     });
 

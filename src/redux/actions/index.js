@@ -1,6 +1,6 @@
 import {
   requestLogin,
-} from './requestLogin';
+} from './requestLogin/index.ts';
 
 import {
   requestLogout,
@@ -36,7 +36,7 @@ import {
 
 import {
   getAccountData,
-} from './getAccountData';
+} from './getAccountData/index.ts';
 
 import {
   updateConnectionStatus,
@@ -44,7 +44,7 @@ import {
 
 import {
   getClock,
-} from './getClock';
+} from './getClock/index.ts';
 
 import {
   saveTradeUpdate,

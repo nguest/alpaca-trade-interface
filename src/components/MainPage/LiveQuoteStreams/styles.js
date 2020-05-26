@@ -9,7 +9,6 @@ import tables from '../../../styles/tables';
 const styles = {
   ...typography,
   container: {
-    //alignItems: 'center',
     border: `1px solid ${colors.text}`,
     display: 'flex',
     flexDirection: 'column',
@@ -38,7 +37,7 @@ const styles = {
       minWidth: 50,
       padding: `${spacing.unit * 0.5} ${spacing.unit}`,
     },
-  }
+  },
 };
 
 export default styles;

@@ -1,16 +1,15 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/core';
 import React, { useEffect, Fragment } from 'react';
-import { object, func } from 'prop-types';
 
-import styles from './styles';
+import styles from './styles.ts';
 
-const commaNum = (n) => parseInt(n, 10).toLocaleString('en-US', { minimumFractionDigits: 2 });
+const commaNum = (n: string) => parseInt(n, 10).toLocaleString('en-US', { minimumFractionDigits: 2 });
 
 const AccountBox = ({
   accountData,
   onRequestAccountData,
-}) => {
+}: AccountBoxProps) => {
   let title = 'Waiting';
   useEffect(() => {
     onRequestAccountData();
@@ -43,9 +42,13 @@ const AccountBox = ({
   );
 };
 
-AccountBox.propTypes = {
-  accountData: object,
-  onRequestAccountData: func,
-};
+interface AccountBoxProps {
+  accountData: {
+    buying_power: string,
+    cash: string,
+    portfolio_value: string,
+  },
+  onRequestAccountData: () => {},
+}
 
 export default AccountBox;

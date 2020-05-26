@@ -1,5 +1,5 @@
 /** @jsx jsx */
-
+import { css, SerializedStyles } from '@emotion/core';
 import colors from '../../../styles/colors';
 import spacing from '../../../styles/spacing';
 import typography from '../../../styles/typography';
@@ -37,7 +37,6 @@ const styles = {
     display: 'flex',
     flex: 1,
     fontSize: '1.2rem',
-    //lineHeight: 1,
   },
   smallHeader: {
     fontSize: '0.8rem',

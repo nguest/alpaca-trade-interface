@@ -5,7 +5,7 @@ import { func, object } from 'prop-types';
 import LiveDataBox from './LiveDataBox';
 import TradeBox from './TradeBox';
 import Orders from '../../containers/Orders';
-import Account from '../../containers/Account';
+import Account from '../../containers/Account/index.tsx';
 import LiveQuotes from '../../containers/LiveQuotes';
 import Status from '../../containers/Status';
 import Header from '../Header';
