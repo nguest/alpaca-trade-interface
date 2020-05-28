@@ -27,22 +27,23 @@ const reducer = (state = initialState, action: Action) => {
       ...state,
       user: action.user,
     };
-  case 'REQUEST_LOGOUT_SUCCEEDED':
+  case at.REQUEST_LOGOUT_SUCCEEDED:
     return {
       ...state,
-      user: null,
+      user: {},
     };
-  case 'REQUEST_LOGIN_ERRORED':
-  case 'REQUEST_LOGOUT_ERRORED':
+  case at.REQUEST_LOGIN_ERRORED:
+  case at.REQUEST_LOGOUT_ERRORED:
   case 'GET_HISTORICAL_DATA_ERRORED':
   case 'CREATE_ORDER_ERRORED':
+  case at.GET_ORDERS_ERRORED:
   case 'GET_ASSETS_ERRORED':
   case at.GET_ACCOUNT_DATA_ERRORED:
     return { ...state, lastError: action.error };
   case 'GET_HISTORICAL_DATA_SUCCEEDED':
   case 'CREATE_TRANSACTION_SUCCEEDED':
     return { ...state, historicalData: action.data };
-  case 'SAVE_LIVE_DATA_SUCCEEDED':
+  case at.SAVE_LIVE_DATA_SUCCEEDED:
     return {
       ...state,
       liveData: {
@@ -50,7 +51,7 @@ const reducer = (state = initialState, action: Action) => {
         [action.ticker]: action.data,
       },
     };
-  case 'SAVE_LIVE_QUOTE_SUCCEEDED':
+  case at.SAVE_LIVE_QUOTE_SUCCEEDED:
     return {
       ...state,
       liveQuotes: {
@@ -68,7 +69,7 @@ const reducer = (state = initialState, action: Action) => {
     };
   case at.GET_ACCOUNT_DATA_SUCCEEDED:
     return { ...state, accountData: action.data };
-  case 'GET_CLOCK_SUCCEEDED':
+  case at.GET_CLOCK_SUCCEEDED:
     return {
       ...state,
       clock: action.data,
@@ -91,7 +92,7 @@ const reducer = (state = initialState, action: Action) => {
         action.data,
       ],
     };
-  case 'GET_ORDERS_SUCCEEDED':
+  case at.GET_ORDERS_SUCCEEDED:
     return {
       ...state,
       orders: action.data,

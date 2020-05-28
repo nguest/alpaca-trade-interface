@@ -20,7 +20,7 @@ const MainContainer = (props) => {
     setNotification(props.notifications[0]);
   }, [props.notifications.length]);
 
-  if (!props.user) {
+  if (!Object.keys(props.user).length) { 
     historyPush('/login');
     return (
       <div css={styles.login}>

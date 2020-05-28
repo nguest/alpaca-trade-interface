@@ -10,12 +10,20 @@ import styles from './styles';
 
 const OrdersPage = ({
   clock,
+  firebase,
   onRequestClock,
+  onRequestLogout,
+  user,
 }) => {
-
   return (
     <main css={styles.main}>
-      <Header clock={clock} onRequestClock={onRequestClock} />
+      <Header
+        user={user}
+        clock={clock}
+        firebase={firebase}
+        onRequestClock={onRequestClock}
+        onRequestLogout={onRequestLogout}
+      />
       <div css={styles.mainGrid}>
         <Orders />
         <Positions />
@@ -27,7 +35,10 @@ const OrdersPage = ({
 
 OrdersPage.propTypes = {
   clock: object,
+  firebase: object,
   onRequestClock: func,
+  onRequestLogout: func,
+  user: object,
 };
 
 export default OrdersPage;

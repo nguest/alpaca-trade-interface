@@ -2,37 +2,37 @@ import React from 'react';
 import { array, func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import MainContainer from '../../components/MainContainer';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 
 const App = ({
+  assets,
   clock,
   createOrder,
   error,
   firebase,
+  getAssets,
   getClock,
   getHistoricalData,
   historicalData,
   liveData,
   notifications,
-  user,
   requestLogout,
-  getAssets,
-  assets,
+  user,
 }) => (
   <MainContainer
+    assets={assets}
     clock={clock}
     error={error}
     firebase={firebase}
+    historicalData={historicalData}
     liveData={liveData}
     notifications={notifications}
     onCreateOrder={createOrder}
-    onRequestHistoricalData={getHistoricalData}
-    onRequestClock={getClock}
-    onRequestLogout={requestLogout}
-    historicalData={historicalData}
-    user={user}
-    assets={assets}
     onRequestAssets={getAssets}
+    onRequestClock={getClock}
+    onRequestHistoricalData={getHistoricalData}
+    onRequestLogout={requestLogout}
+    user={user}
   />
 );
 

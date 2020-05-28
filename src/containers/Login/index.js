@@ -2,7 +2,7 @@ import React from 'react';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginPage/LoginForm';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 
 const Login = ({
   requestLogin,

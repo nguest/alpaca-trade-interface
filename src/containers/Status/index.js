@@ -2,13 +2,13 @@ import React from 'react';
 import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import StatusBar from '../../components/StatusBar';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 
 const Status = ({
   connectionStatus,
 }) => (
   <StatusBar
-   connectionStatus={connectionStatus}
+    connectionStatus={connectionStatus}
   />
 );
 

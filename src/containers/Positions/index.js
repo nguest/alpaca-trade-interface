@@ -2,7 +2,7 @@ import React from 'react';
 import { func, array } from 'prop-types';
 import { connect } from 'react-redux';
 import PositionsBox from '../../components/PositionsBox';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 
 const Positions = ({
   positions,

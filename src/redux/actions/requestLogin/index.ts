@@ -1,11 +1,13 @@
 import createNotification from '../createNotification';
 import { Dispatch } from 'redux';
-// import 'firebase/auth';
-import { FirebaseAuth } from '@firebase/auth-types';
-
+import 'firebase/auth';
 import * as firebase from 'firebase/app';
+//import { FirebaseAuth } from '@firebase/auth-types';
+
+//import * as firebase from 'firebase/app';
 import { historyPush } from '../../../router';
 import { getPersistedUser } from '../../../utils';
+import { cachedDataVersionTag } from 'v8';
 
 export const REQUEST_LOGIN_ERRORED = 'REQUEST_LOGIN_ERRORED';
 export const REQUEST_LOGIN_SUCCEEDED = 'REQUEST_LOGIN_SUCCEEDED';
@@ -21,7 +23,7 @@ interface RequestLoginSucceededAction {
 };
 
 interface Params {
-  firebase: { auth: FirebaseAuth },
+  firebase: object,
   user: string,
   password: string,
 }
@@ -38,7 +40,7 @@ export const requestLoginSucceeded = (user: {}):RequestLoginSucceededAction => (
 
 export const requestLogin = (params: Params) => (dispatch: Dispatch<any>) => {
   const user = getPersistedUser();
-
+  console.log({user})
   if (user) {
     historyPush('/');
     dispatch(requestLoginSucceeded(user));
@@ -47,10 +49,11 @@ export const requestLogin = (params: Params) => (dispatch: Dispatch<any>) => {
 
 
   if (!params.user || !params.password || !params.password) return false;
-
-  params.firebase.auth().setPersistence(params.firebase.auth.Auth.Persistence.SESSION)
+  //firebase.auth.Auth.Persistence.SESSION
+  console.log({pp: params.firebase})
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
     .then(() => {
-      params.firebase.auth().signInWithEmailAndPassword(params.user, params.password)
+      firebase.auth().signInWithEmailAndPassword(params.user, params.password)
         .then((response) => {
           historyPush('/');
           dispatch(requestLoginSucceeded(response.user));

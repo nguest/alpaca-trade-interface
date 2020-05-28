@@ -4,19 +4,16 @@ import {
 
 import {
   requestLogout,
-} from './requestLogout';
+} from './requestLogout/index.ts';
 
 import {
   getHistoricalData,
-  getHistoricalDataErrored,
-  getHistoricalDataSucceeded,
 } from './getHistoricalData';
 
 import {
   saveLiveData,
-  saveLiveDataErrored,
   saveLiveDataSucceeded,
-} from './saveLiveData';
+} from './saveLiveData/index.ts';
 
 import {
   createOrder,
@@ -24,11 +21,11 @@ import {
 
 import {
   getOrders,
-} from './getOrders';
+} from './getOrders/index.ts';
 
 import {
   cancelOrder,
-} from './cancelOrder';
+} from './cancelOrder/index.ts';
 
 import {
   getPositions,
@@ -52,7 +49,7 @@ import {
 
 import {
   saveLiveQuote,
-} from './saveLiveQuote';
+} from './saveLiveQuote/index.ts';
 
 import {
   getAssets,
@@ -71,11 +68,8 @@ const actions = {
   requestLogout,
   getAccountData,
   getHistoricalData,
-  getHistoricalDataErrored,
-  getHistoricalDataSucceeded,
   getPositions,
   saveLiveData,
-  saveLiveDataErrored,
   saveLiveDataSucceeded,
   saveLiveQuote,
   saveTradeUpdate,

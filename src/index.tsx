@@ -20,13 +20,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const fireBaseApp = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 const rootElement = document.getElementById('root');
 
 ReactDOM.render((
   <Provider store={store}>
     <WebsocketSubscriber />
-    <App firebase={fireBaseApp} />
+    <App firebase={firebase} />
   </Provider>
 ), rootElement);

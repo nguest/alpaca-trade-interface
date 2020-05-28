@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux'
 // import * as React from 'react'
 import AccountBox from '../../components/MainPage/AccountBox/index.tsx';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 import { RootState } from '../../redux/reducers/types';
 
 // interface StateProps {

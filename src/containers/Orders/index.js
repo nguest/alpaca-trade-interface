@@ -2,7 +2,7 @@ import React from 'react';
 import { func, array, string } from 'prop-types';
 import { connect } from 'react-redux';
 import OrdersBox from '../../components/OrdersBox';
-import actions from '../../redux/actions';
+import actions from '../../redux/actions/index.ts';
 
 const Orders = ({
   cancelOrder,

@@ -1,5 +1,5 @@
 import React from 'react';
-import reducer, { initialState } from '.';
+import reducer, { initialState } from './index.ts';
 
 describe('reducer', () => {
   it('returns unchanged state if no action is specificed', () => {

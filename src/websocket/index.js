@@ -1,5 +1,5 @@
-import actions from '../redux/actions';
 import { connect } from 'react-redux';
+import actions from '../redux/actions/index.ts';
 
 //import Alpaca from '@alpacahq/alpaca-trade-api';
 
