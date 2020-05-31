@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { Dispatch } from 'redux';
-import createNotification from '../createNotification';
+import { createNotification } from '../createNotification/index.ts';
 import { historyPush } from '../../../router';
 
 export const REQUEST_LOGOUT_ERRORED = 'REQUEST_LOGOUT_ERRORED';

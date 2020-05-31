@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import createNotification from '../createNotification';
-import { headers } from '../../../config.ts'
+import { createNotification}  from '../createNotification/index.ts';
+import { headers } from '../../../config'
 import { Dispatch } from 'redux';
 
 export const GET_CLOCK_ERRORED = 'GET_CLOCK_ERRORED';

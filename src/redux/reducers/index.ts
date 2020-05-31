@@ -4,6 +4,7 @@ import * as at from '../actions/actionTypes';
 
 
 export const initialState: RootState = {
+  assets: [],
   accountData: {},
   notifications: [],
   historicalData: {},
@@ -34,14 +35,13 @@ const reducer = (state = initialState, action: Action) => {
     };
   case at.REQUEST_LOGIN_ERRORED:
   case at.REQUEST_LOGOUT_ERRORED:
-  case 'GET_HISTORICAL_DATA_ERRORED':
-  case 'CREATE_ORDER_ERRORED':
+  case at.GET_HISTORICAL_DATA_ERRORED:
+  case at.CREATE_ORDER_ERRORED:
   case at.GET_ORDERS_ERRORED:
-  case 'GET_ASSETS_ERRORED':
+  case at.GET_ASSETS_ERRORED:
   case at.GET_ACCOUNT_DATA_ERRORED:
     return { ...state, lastError: action.error };
-  case 'GET_HISTORICAL_DATA_SUCCEEDED':
-  case 'CREATE_TRANSACTION_SUCCEEDED':
+  case at.GET_HISTORICAL_DATA_SUCCEEDED:
     return { ...state, historicalData: action.data };
   case at.SAVE_LIVE_DATA_SUCCEEDED:
     return {
@@ -59,7 +59,7 @@ const reducer = (state = initialState, action: Action) => {
         [action.ticker]: action.data,
       },
     };
-  case 'SAVE_TRADE_UPDATE_SUCCEEDED':
+  case at.SAVE_TRADE_UPDATE_SUCCEEDED:
     return {
       ...state,
       tradeUpdates: [
@@ -74,7 +74,7 @@ const reducer = (state = initialState, action: Action) => {
       ...state,
       clock: action.data,
     };
-  case 'UPDATE_CONNECTION_STATUS_SUCCEEDED':
+  case at.UPDATE_CONNECTION_STATUS_SUCCEEDED:
     console.log({ 1: state.connectionStatus, 2: action.status  });
     
     return {
@@ -84,7 +84,7 @@ const reducer = (state = initialState, action: Action) => {
         ...action.status,
       },
     };
-  case 'CREATE_ORDER_SUCCEEDED':
+  case at.CREATE_ORDER_SUCCEEDED:
     return {
       ...state,
       newOrders: [
@@ -97,22 +97,22 @@ const reducer = (state = initialState, action: Action) => {
       ...state,
       orders: action.data,
     };
-  case 'CANCEL_ORDER_SUCCEEDED':
+  case at.CANCEL_ORDER_SUCCEEDED:
     return {
       ...state,
       orders: state.orders.filter((o) => o.id !== action.id),
     };
-  case 'GET_POSITIONS_SUCCEEDED':
+  case at.GET_POSITIONS_SUCCEEDED:
     return {
       ...state,
       positions: action.data,
     };
-  case 'GET_ASSETS_SUCCEEDED':
+  case at.GET_ASSETS_SUCCEEDED:
     return {
       ...state,
       assets: action.data,
     };
-  case 'CREATE_NOTIFICATION':
+  case at.CREATE_NOTIFICATION:
     return {
       ...state,
       notifications: [

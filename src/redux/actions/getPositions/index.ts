@@ -1,17 +1,31 @@
 import axios from 'axios';
-import createNotification from '../createNotification';
+import { Dispatch } from 'redux';
+import { createNotification } from '../createNotification/index.ts';
 
-export const getPositionsErrored = (error) => ({
+export const GET_POSITIONS_SUCCEEDED = 'GET_POSITIONS_SUCCEEDED';
+export const GET_POSITIONS_ERRORED = 'GET_POSITIONS_ERRORED';
+
+interface GetPositionsErroredAction {
+  type: typeof GET_POSITIONS_ERRORED,
+  error: Error,
+}
+
+interface GetPositionsSucceededAction {
+  type: typeof GET_POSITIONS_SUCCEEDED,
+  data: [],
+}
+
+export const getPositionsErrored = (error: Error): GetPositionsErroredAction => ({
   type: 'GET_POSITIONS_ERRORED',
   error,
 });
 
-export const getPositionsSucceeded = (data) => ({
+export const getPositionsSucceeded = (data: []): GetPositionsSucceededAction => ({
   type: 'GET_POSITIONS_SUCCEEDED',
   data,
 });
 
-export const getPositions = () => (dispatch) => {
+export const getPositions = () => (dispatch: Dispatch<any>) => {
   const headers = {
     'Content-Type': 'application/json',
     'APCA-API-KEY-ID': process.env.REACT_APP_ALPACA_CLIENT_ID,
@@ -27,8 +41,7 @@ export const getPositions = () => (dispatch) => {
       return null;
     })
     .catch((e) => {
-      console.log({ e });
-      dispatch(getPositionsErrored({ error: e }));
+      dispatch(getPositionsErrored(e));
       const message = (e.response && e.response.data && e.response.data.error) || e.message;
       return dispatch(createNotification({ noteType: 'ERROR', message }));
     });

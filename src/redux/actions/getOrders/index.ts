@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import createNotification from '../createNotification';
+import { createNotification } from '../createNotification/index.ts';
 import { headers } from '../../../config';
 
 export const GET_ORDERS_ERRORED = 'GET_ORDERS_ERRORED';

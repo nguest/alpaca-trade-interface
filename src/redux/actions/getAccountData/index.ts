@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import createNotification from '../createNotification';
+import { createNotification } from '../createNotification/index.ts';
 import { Dispatch } from 'redux';
 import { headers } from '../../../config.ts'
 

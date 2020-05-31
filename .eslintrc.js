@@ -1,5 +1,6 @@
 module.exports = {
-  "extends": "airbnb",
+  "extends": ["airbnb"],
+
   "env": {
     "browser": true,
     "node": true,
@@ -9,8 +10,7 @@ module.exports = {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
   },
-  "parser": "babel-eslint",
-
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
       "ecmaFeatures": {
         "jsx": true
@@ -20,6 +20,7 @@ module.exports = {
   },
   "plugins": [
       "react",
+      "@typescript-eslint"
   ],
   rules: {
     "indent": ["error", 2], // A custom style-related rule for example
@@ -52,6 +53,7 @@ module.exports = {
     "max-classes-per-file": "off",
     "react/jsx-fragments": "off",
     "jsx-a11y/click-events-have-key-events": "off",
-    "jsx-a11y/no-noninteractive-element-interactions": "off"
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "camelcase": "off"
   }
 };

@@ -31,6 +31,43 @@ import {
   GET_ORDERS_SUCCEEDED,
 } from './getOrders/index.ts'
 
+import {
+  GET_ASSETS_ERRORED,
+  GET_ASSETS_SUCCEEDED,
+} from './getAssets/index.ts'
+
+import {
+  GET_HISTORICAL_DATA_SUCCEEDED,
+  GET_HISTORICAL_DATA_ERRORED,
+} from './getHistoricalData/index.ts';
+
+import {
+  SAVE_TRADE_UPDATE_SUCCEEDED,
+} from './saveTradeUpdate/index.ts';
+
+import {
+  GET_POSITIONS_SUCCEEDED,
+  GET_POSITIONS_ERRORED,
+} from './getPositions/index.ts';
+
+import {
+  UPDATE_CONNECTION_STATUS_SUCCEEDED,
+} from './updateConnectionStatus/index.ts'
+
+import { 
+  CREATE_ORDER_ERRORED,
+  CREATE_ORDER_SUCCEEDED,
+} from './createOrder/index.ts';
+
+import {
+  CANCEL_ORDER_SUCCEEDED,
+} from './cancelOrder/index.ts'
+
+import {
+  CREATE_NOTIFICATION,
+} from  './createNotification/index.ts'
+
+
  export {
   GET_ACCOUNT_DATA_SUCCEEDED,
   GET_ACCOUNT_DATA_ERRORED,
@@ -43,5 +80,17 @@ import {
   SAVE_LIVE_DATA_SUCCEEDED,
   SAVE_LIVE_QUOTE_SUCCEEDED,
   GET_ORDERS_ERRORED,
+  GET_ASSETS_SUCCEEDED,
   GET_ORDERS_SUCCEEDED,
+  SAVE_TRADE_UPDATE_SUCCEEDED,
+  GET_POSITIONS_SUCCEEDED,
+  GET_POSITIONS_ERRORED,
+  GET_HISTORICAL_DATA_SUCCEEDED,
+  GET_HISTORICAL_DATA_ERRORED,
+  UPDATE_CONNECTION_STATUS_SUCCEEDED,
+  CREATE_ORDER_ERRORED,
+  CREATE_ORDER_SUCCEEDED,
+  GET_ASSETS_ERRORED,
+  CANCEL_ORDER_SUCCEEDED,
+  CREATE_NOTIFICATION,
  }

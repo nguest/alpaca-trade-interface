@@ -1,4 +1,4 @@
-import createNotification from '../createNotification';
+import { createNotification } from '../createNotification/index.ts';
 import { Dispatch } from 'redux';
 import 'firebase/auth';
 import * as firebase from 'firebase/app';

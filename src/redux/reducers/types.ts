@@ -1,4 +1,5 @@
 export interface RootState {
+  assets: [],
   accountData: {},
   notifications: [],
   historicalData: {},

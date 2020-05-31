@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
-import createNotification from '../createNotification';
-import { headers } from '../../../config';
+import { createNotification } from '../createNotification/index.ts';
+// @ts-ignore
+import { headers } from '../../../config.ts';
 
 export const CANCEL_ORDER_ERRORED = 'CANCEL_ORDER_ERRORED';
 export const CANCEL_ORDER_SUCCEEDED = 'CANCEL_ORDER_SUCCEEDED';
@@ -36,8 +37,6 @@ export const cancelOrder = (id: string) => (dispatch: Dispatch<any>) => {
       return null;
     })
     .catch((e) => {
-      console.log({ e });
-      
       dispatch(cancelOrderErrored(e));
       const message = (e.response && e.response.data && e.response.data.error) || e.message;
       return dispatch(createNotification({ noteType: 'ERROR', message }));
